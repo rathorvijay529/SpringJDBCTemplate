@@ -14,5 +14,7 @@ public interface Employeerepo {
 	public Boolean deleteEmployee(Integer empId);
 
 	public EmployeeEntity updateEmployee(Integer empId);
+	
+	public Integer saveWithNamedParameter(EmployeeEntity employeeEntity);
 
 }

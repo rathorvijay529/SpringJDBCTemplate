@@ -22,22 +22,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	private Employeerepo employeerepo;
 
-	public Employeerepo getEmployeerepo() {
-		return employeerepo;
-	}
-
-	public void setEmployeerepo(Employeerepo employeerepo) {
-		System.out.println("********Setter*********");
-		this.employeerepo = employeerepo;
-	}
-
-	
-
 	@Override
 	public Boolean processingSaveEmployee(EmployeeEntity employeeEntity) {
 		List<ErrorEntity> errorList = payLoadValidation(employeeEntity);
 		if (errorList.size() == 0)
-			return (employeerepo.save(employeeEntity) == 1) ? true : false;
+			return (employeerepo.saveWithNamedParameter(employeeEntity) == 1) ? true : false;
 		else
 
 			throw new MissingFieldException(new CustomErrorEntity(errorList));
@@ -68,10 +57,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 		if (null == employeeEntity.getEmployeeId()) {
 			errorMsgList.add(new ErrorEntity(ErrorMessageNdCodes.MISSING_EMPID.getDescription(),
 					ErrorMessageNdCodes.MISSING_EMPID.getCode()));
-		} /*else if (null != employeerepo.getEmployee(employeeEntity.getEmployeeId())) {
-			errorMsgList.add(new ErrorEntity(ErrorMessageNdCodes.DUPLICATE_EMPID.getDescription(),
-					ErrorMessageNdCodes.DUPLICATE_EMPID.getCode()));
-		}*/
+		} /*
+			 * else if (null !=
+			 * employeerepo.getEmployee(employeeEntity.getEmployeeId())) {
+			 * errorMsgList.add(new
+			 * ErrorEntity(ErrorMessageNdCodes.DUPLICATE_EMPID.getDescription(),
+			 * ErrorMessageNdCodes.DUPLICATE_EMPID.getCode())); }
+			 */
 		if (null == employeeEntity.getFname()) {
 			errorMsgList.add(new ErrorEntity(ErrorMessageNdCodes.MISSING_FIRSTNAME.getDescription(),
 					ErrorMessageNdCodes.MISSING_FIRSTNAME.getCode()));
