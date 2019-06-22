@@ -34,6 +34,15 @@ public class EmployeeServiceImplementation implements EmployeeService {
 		return empRepo.getEmployee(id);
 	}
 
+	public Employee processGetEmployeeUsingNamedQuery(Integer id) {
+		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
+		logger.info("Retriving the Employee is processing method name::processGetEmployeeUsingNamedQuery");
+		logger.info("Argument::" + "id");
+		if (payLoadValidationForID(id).size() != 0)
+			throw new MissingParameterInThePayLoad(new CustomErrorEntity(payLoadValidationForID(id)));
+		return empRepo.getEmployeeWithNamedParaMeter(id);
+	}
+
 	public List<Employee> processGetEmployees() {
 		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
 		logger.info("Retriving the Employee is processing method name::processGetEmployees");
@@ -62,6 +71,29 @@ public class EmployeeServiceImplementation implements EmployeeService {
 			throw new MissingParameterInThePayLoad(new CustomErrorEntity(errlist));
 
 		logger.info("Saving Layer Invoking is completed");
+	}
+
+	public void processSaveUsingNamedParameter(EmployeeEntity employeeEntity) {
+		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
+		logger.info("Saving the Employee is processing method name::processSaveUsingNamedParameter");
+		logger.info("Argument::" + employeeEntity);
+		List<ErrorResponse> errlist = payLoadValidation(employeeEntity);
+		if (errlist.size() == 0)
+			empRepo.saveEmployeeUsingNamedParaMeter(employeeEntity);// using named parameter
+		else
+			throw new MissingParameterInThePayLoad(new CustomErrorEntity(errlist));
+
+		logger.info("Saving Layer Invoking is completed");
+	}
+
+	public void processDeleteUsingNamedParameter(Integer id) {
+		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
+		logger.info("Deleting the Employee is processing, method name::processDeleteUsingNamedParameter");
+		logger.info("Argument::" + "id");
+		if (payLoadValidationForID(id).size() != 0)
+			throw new MissingParameterInThePayLoad(new CustomErrorEntity(payLoadValidationForID(id)));
+		empRepo.deleteUsingNamedParameterQuery(id);
+		logger.info("Delete is completed");
 	}
 
 	public String processUpdateEmployee(EmployeeEntity employeeEntity) {

@@ -21,8 +21,7 @@ import com.properties.Queries;
 
 @Repository
 public class EmployeeRepoImplementation implements EmployeeRepo {
-	private static final Logger logger = Logger
-			.getLogger(EmployeeRepoImplementation.class);
+	private static final Logger logger = Logger.getLogger(EmployeeRepoImplementation.class);
 
 	@Autowired
 	private JdbcTemplate jdbctemplate;
@@ -36,31 +35,28 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 			logger.info("Repository Layer Invoked::EmployeeRepoImplement {}");
 			logger.info("Retriving  the Employee is processing method name::getEmployee");
 			logger.info("Argument::" + "id");
-			return jdbctemplate.query(Queries.QUERYFORGETTINGEMPLOYEE,
-					new PreparedStatementSetter() {
+			return jdbctemplate.query(Queries.QUERYFORGETTINGEMPLOYEE, new PreparedStatementSetter() {
 
-						public void setValues(PreparedStatement ps)
-								throws SQLException {
-							ps.setInt(1, id);
-						}
+				public void setValues(PreparedStatement ps) throws SQLException {
+					ps.setInt(1, id);
+				}
 
-					}, new RowMapper<Employee>() {
+			}, new RowMapper<Employee>() {
 
-						public Employee mapRow(ResultSet resultSet, int rowNum)
-								throws SQLException {
-							Employee employee = new Employee();
-							employee.setId(resultSet.getInt(1));
-							employee.setAge(resultSet.getInt(2));
-							employee.setFirstName(resultSet.getString(3));
-							employee.setLastName(resultSet.getString(4));
-							employee.setAddress(resultSet.getString(5));
-							employee.setBloodGroup(resultSet.getString(6));
-							employee.setDepartmentName(resultSet.getString(7));
-							employee.setEmployeeType(resultSet.getString(8));
-							return employee;
-						}
+				public Employee mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+					Employee employee = new Employee();
+					employee.setId(resultSet.getInt(1));
+					employee.setAge(resultSet.getInt(2));
+					employee.setFirstName(resultSet.getString(3));
+					employee.setLastName(resultSet.getString(4));
+					employee.setAddress(resultSet.getString(5));
+					employee.setBloodGroup(resultSet.getString(6));
+					employee.setDepartmentName(resultSet.getString(7));
+					employee.setEmployeeType(resultSet.getString(8));
+					return employee;
+				}
 
-					}).get(0);
+			}).get(0);
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
@@ -71,41 +67,37 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 		logger.info("Repository Layer Invoked::EmployeeRepoImplement");
 		logger.info("Retriving  the Employee is processing method name::getEmployees");
 		logger.info("Argument::" + "");
-		return jdbctemplate.query(Queries.QUERYFORALLEMPLOYEES,
-				new RowMapper<Employee>() {
+		return jdbctemplate.query(Queries.QUERYFORALLEMPLOYEES, new RowMapper<Employee>() {
 
-					public Employee mapRow(ResultSet resultSet, int rowNum)
-							throws SQLException {
-						Employee employee = new Employee();
-						employee.setId(resultSet.getInt(1));
-						employee.setAge(resultSet.getInt(2));
-						employee.setFirstName(resultSet.getString(3));
-						employee.setLastName(resultSet.getString(4));
-						employee.setAddress(resultSet.getString(5));
-						employee.setBloodGroup(resultSet.getString(6));
-						employee.setDepartmentName(resultSet.getString(7));
-						employee.setEmployeeType(resultSet.getString(8));
-						return employee;
-					}
+			public Employee mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+				Employee employee = new Employee();
+				employee.setId(resultSet.getInt(1));
+				employee.setAge(resultSet.getInt(2));
+				employee.setFirstName(resultSet.getString(3));
+				employee.setLastName(resultSet.getString(4));
+				employee.setAddress(resultSet.getString(5));
+				employee.setBloodGroup(resultSet.getString(6));
+				employee.setDepartmentName(resultSet.getString(7));
+				employee.setEmployeeType(resultSet.getString(8));
+				return employee;
+			}
 
-				});
+		});
 	}
 
-	public void delete(final int id) {
+	public void delete(final Integer id) {
 
 		try {
 			logger.info("Repository Layer Invoked::EmployeeRepoImplement");
 			logger.info("Deleting  the Employee is processing method name::delete");
 			logger.info("Argument::" + "id");
-			jdbctemplate.update(Queries.QUERYFORDELETEEMPLOYEE,
-					new PreparedStatementSetter() {
+			jdbctemplate.update(Queries.QUERYFORDELETEEMPLOYEE, new PreparedStatementSetter() {
 
-						public void setValues(PreparedStatement ps)
-								throws SQLException {
-							ps.setInt(1, id);
-						}
+				public void setValues(PreparedStatement ps) throws SQLException {
+					ps.setInt(1, id);
+				}
 
-					});
+			});
 			logger.info("Deleted");
 		} catch (EmptyResultDataAccessException e) {
 
@@ -116,22 +108,20 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 		logger.info("Repository Layer Invoked::EmployeeRepoImplement");
 		logger.info("Saving the Employee is processing method name::save");
 		logger.info("Argument::" + emp);
-		jdbctemplate.update(Queries.INSERT_EMPLOYEES,
-				new PreparedStatementSetter() {
+		jdbctemplate.update(Queries.INSERT_EMPLOYEES, new PreparedStatementSetter() {
 
-					public void setValues(PreparedStatement preparedstatement)
-							throws SQLException {
-						preparedstatement.setInt(1, emp.getId());
-						preparedstatement.setInt(2, emp.getAge());
-						preparedstatement.setString(3, emp.getFirstName());
-						preparedstatement.setString(4, emp.getLastName());
-						preparedstatement.setString(5, emp.getAddress());
-						preparedstatement.setString(6, emp.getBloodGroup());
-						preparedstatement.setString(7, emp.getDepartmentName());
-						preparedstatement.setString(8, emp.getEmployeeType());
-					}
+			public void setValues(PreparedStatement preparedstatement) throws SQLException {
+				preparedstatement.setInt(1, emp.getId());
+				preparedstatement.setInt(2, emp.getAge());
+				preparedstatement.setString(3, emp.getFirstName());
+				preparedstatement.setString(4, emp.getLastName());
+				preparedstatement.setString(5, emp.getAddress());
+				preparedstatement.setString(6, emp.getBloodGroup());
+				preparedstatement.setString(7, emp.getDepartmentName());
+				preparedstatement.setString(8, emp.getEmployeeType());
+			}
 
-				});
+		});
 		logger.info("Data Inserted Success");
 
 	}
@@ -140,22 +130,20 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 		logger.info("Repository Layer Invoked::EmployeeRepoImplement");
 		logger.info("Updating the Employee is processing method name::updateEmployee");
 		logger.info("Argument::" + emp);
-		jdbctemplate.update(Queries.QUERYFORUPDATEEMPLOYEE,
-				new PreparedStatementSetter() {
+		jdbctemplate.update(Queries.QUERYFORUPDATEEMPLOYEE, new PreparedStatementSetter() {
 
-					public void setValues(PreparedStatement preparedstatement)
-							throws SQLException {
-						preparedstatement.setInt(8, emp.getId());
-						preparedstatement.setInt(2, emp.getAge());
-						preparedstatement.setString(1, emp.getFirstName());
-						preparedstatement.setString(3, emp.getLastName());
-						preparedstatement.setString(4, emp.getAddress());
-						preparedstatement.setString(5, emp.getBloodGroup());
-						preparedstatement.setString(6, emp.getDepartmentName());
-						preparedstatement.setString(7, emp.getEmployeeType());
-					}
+			public void setValues(PreparedStatement preparedstatement) throws SQLException {
+				preparedstatement.setInt(8, emp.getId());
+				preparedstatement.setInt(2, emp.getAge());
+				preparedstatement.setString(1, emp.getFirstName());
+				preparedstatement.setString(3, emp.getLastName());
+				preparedstatement.setString(4, emp.getAddress());
+				preparedstatement.setString(5, emp.getBloodGroup());
+				preparedstatement.setString(6, emp.getDepartmentName());
+				preparedstatement.setString(7, emp.getEmployeeType());
+			}
 
-				});
+		});
 		logger.info("Data Updated Successfully");
 
 		return "updated";
@@ -166,14 +154,11 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 
 		try {
 			logger.info("Repository Layer Invoked::EmployeeRepoImplement {}");
-			logger.info("Retriving  the Employee is processing method name::getEmployee");
+			logger.info("Retriving  the Employee is processing method name::getEmployeeWithNamedParaMeter");
 			logger.info("Argument::" + "id");
-			return namedParameterJdbcTemplate.query(
-					Queries.QUERYFORGETTINGEMPLOYEEWITHNAMEDPARAMETER,
-					new MapSqlParameterSource().addValue("id", id),
-					new RowMapper<Employee>() {
-						public Employee mapRow(ResultSet resultSet, int rowNum)
-								throws SQLException {
+			return namedParameterJdbcTemplate.query(Queries.QUERY_FOR_GETTING_EMPLOYEE_By_ID_WITH_NAMED_PARAMETER,
+					new MapSqlParameterSource().addValue("id", id), new RowMapper<Employee>() {
+						public Employee mapRow(ResultSet resultSet, int rowNum) throws SQLException {
 							Employee employee = new Employee();
 							employee.setId(resultSet.getInt(1));
 							employee.setAge(resultSet.getInt(2));
@@ -193,8 +178,36 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 
 	}
 
-	
-	
-//delete,create by Vijeta
-// update by Rizwan
+	// Named Template: Save Employee using Named Parameter
+	public void saveEmployeeUsingNamedParaMeter(final EmployeeEntity emp) {
+
+		try {
+			logger.info("Repository Layer Invoked::EmployeeRepoImplement {}");
+			logger.info("Saving  the Employee is processing method name::saveEmployeeUsingNamedParaMeter");
+			logger.info("Argument::" + emp);
+			namedParameterJdbcTemplate.update(Queries.INSERT_EMPLOYEES_WIH_NAMED_PARAMETER,
+					new MapSqlParameterSource().addValue("id", emp.getId()).addValue("age", emp.getAge())
+							.addValue("firstName", emp.getFirstName()).addValue("lastName", emp.getLastName())
+							.addValue("bloodGroup", emp.getBloodGroup())
+							.addValue("departmentName", emp.getDepartmentName())
+							.addValue("employeeType", emp.getEmployeeType()));
+
+		} catch (EmptyResultDataAccessException e) {
+		}
+	}
+	// Named Template: Delete Employee using Named Parameter
+	public void deleteUsingNamedParameterQuery(final Integer id) {
+
+		try {
+			logger.info("Repository Layer Invoked::EmployeeRepoImplement");
+			logger.info("Deleting  the Employee is processing method name::deleteUsingNamedParameterQuery");
+			logger.info("Argument::" + "id");
+			namedParameterJdbcTemplate.update(Queries.QUERY_FOR_DELETE_EMPLOYEE_WITH_NAMED_PARAMETER,
+					new MapSqlParameterSource().addValue("id", id));
+			logger.info("Deleted");
+		} catch (EmptyResultDataAccessException e) {
+
+		}
+	}
+
 }

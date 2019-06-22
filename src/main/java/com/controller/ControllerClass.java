@@ -72,7 +72,7 @@ public class ControllerClass {
 			return new ResponseEntity<Object>(exception.getCustomErrorEntity(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	@RequestMapping(value = "/updateEmpData", method = RequestMethod.PUT)
 	public ResponseEntity<Object> updateEmpData(@RequestBody EmployeeEntity emp) {
 		try {
@@ -81,8 +81,8 @@ public class ControllerClass {
 			logger.info("HTTP Method Post");
 			logger.info("Request Body ::" + emp);
 			empService.processUpdateEmployee(emp);
-			return new ResponseEntity<Object>(
-					new SuccessResponse(HttpStatus.OK.value(), HttpStatus.OK.toString()), HttpStatus.OK);
+			return new ResponseEntity<Object>(new SuccessResponse(HttpStatus.OK.value(), HttpStatus.OK.toString()),
+					HttpStatus.OK);
 
 		} catch (MissingParameterInThePayLoad exception) {
 			logger.error(exception.getMessage());
@@ -90,7 +90,7 @@ public class ControllerClass {
 		}
 	}
 
-	@RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteEmployee", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> deleteEmployee(@RequestParam("id") Integer id) {
 		try {
 			logger.info("Deleting the employee data started");
@@ -98,7 +98,8 @@ public class ControllerClass {
 			logger.info("HTTP method :: Get");
 			logger.info("RequestBody :: " + "id");
 			empService.processDelete(id);
-			return new ResponseEntity<Object>(new SuccessResponse(HttpStatus.CREATED.value(), HttpStatus.CREATED.toString()), HttpStatus.CREATED);
+			return new ResponseEntity<Object>(
+					new SuccessResponse(HttpStatus.CREATED.value(), HttpStatus.CREATED.toString()), HttpStatus.CREATED);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -107,4 +108,58 @@ public class ControllerClass {
 				HttpStatus.NO_CONTENT);
 
 	}
+
+	@RequestMapping(value = "/saveEmpDataUsingNameQuery", method = RequestMethod.POST)
+	public ResponseEntity<Object> saveEmpDataUsingNameQuery(@RequestBody EmployeeEntity emp) {
+		try {
+			logger.info("Saving the Employee Data Started");
+			logger.info("In the RestAPI::/saveEmpDataUsingNameQuery");
+			logger.info("HTTP Method Post");
+			logger.info("Request Body ::" + emp);
+			empService.processSave(emp);
+			return new ResponseEntity<Object>(
+					new SuccessResponse(HttpStatus.CREATED.value(), HttpStatus.CREATED.toString()), HttpStatus.CREATED);
+
+		} catch (MissingParameterInThePayLoad exception) {
+			logger.error(exception.getMessage());
+			return new ResponseEntity<Object>(exception.getCustomErrorEntity(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@RequestMapping(value = "/deleteEmployeeUsingNamedQuery", method = RequestMethod.DELETE)
+	public ResponseEntity<Object> deleteEmployeeUsingNamedQuery(@RequestParam("id") Integer id) {
+		try {
+			logger.info("Deleting the employee data started");
+			logger.info("RestAPI::/deleteEmployeeUsingNamedQuery");
+			logger.info("HTTP method :: Get");
+			logger.info("RequestBody :: " + "id");
+			empService.processDeleteUsingNamedParameter(id);
+			return new ResponseEntity<Object>(
+					new SuccessResponse(HttpStatus.CREATED.value(), HttpStatus.CREATED.toString()), HttpStatus.CREATED);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return new ResponseEntity<Object>(
+				new SuccessResponse(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.toString()),
+				HttpStatus.NO_CONTENT);
+
+	}
+	
+	@RequestMapping(value = "/getEmployeeByIDUsingNamedQuery", method = RequestMethod.GET)
+	public ResponseEntity<Object> getEmployeeByIDUsingNamedQuery(@RequestParam("id") Integer id) {
+		try {
+			logger.info("Retriving the employee data started");
+			logger.info("RestAPI::/getEmployeeByIDUsingNamedQuery");
+			logger.info("HTTP method :: Get");
+			logger.info("RequestBody :: " + "");
+			return new ResponseEntity<Object>(empService.processGetEmployeeUsingNamedQuery(id), HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return new ResponseEntity<Object>(
+				new SuccessResponse(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.toString()),
+				HttpStatus.NO_CONTENT);
+
+	}
+
 }

@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>SpringWithHibernateJPAAndJDBCTemplate</groupId>
-	<artifactId>SpringWithHibernateJPAAndJDBCTemplate</artifactId>
+	<groupId>SpringJDBCTemplate</groupId>
+	<artifactId>SpringJDBCTemplate</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1</version>
-	<name>SpringWithHibernateJPAAndJDBCTemplate Maven Webapp</name>
+	<name>SpringJDBCTemplate</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -102,6 +102,6 @@
 
 
 	<build>
-		<finalName>SpringWithHibernateJPAAndJDBCTemplate</finalName>
+		<finalName>SpringJDBCTemplate</finalName>
 	</build>
 </project>
