@@ -1,0 +1,36 @@
+package com.properties;
+/**
+ * @author rizwan
+ *
+ */
+public enum ErrorCodeMessages {
+	
+	DUPLICATE_EMPID(1000, "Duplicate Id"),
+	MISSING_EMPID(1001, "Missing Required::Id"),
+	MISSING_AGE(1002, "Missing Required::Age"),
+	MISSING_FIRSTNAME(1003, "Missing Required::FirstName"),
+	MISSING_LASTNAME(1004, "Missing Required::LastName"),
+	MISSING_ADDRESS(1005, "Missing Required::address"),
+	MISSING_BLOODGROUP(1006, "Missing Required::bloodGroup"),
+	MISSING_DEPARTMENTNAME(1007, "Missing Required::departmentName"),
+	MISSING_EMPLOYEETYPE(1008, "Missing Required::employeeType");
+	
+	private final Integer code;
+	private final String description;
+	
+	public Integer getCode() {
+		return code;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	private ErrorCodeMessages(Integer code, String description) {
+		this.code = code;
+		this.description = description;
+	}
+	
+
+
+}
