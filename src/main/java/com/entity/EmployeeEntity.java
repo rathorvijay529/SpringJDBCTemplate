@@ -1,52 +1,91 @@
 package com.entity;
 
-import java.util.List;
+import javax.persistence.Entity;
+
 
 public class EmployeeEntity {
-	private Integer employeeId;
-	private String fname;
-	private String lname;
+
+	private Integer id;
 	private Integer age;
-	private String branchName;
-	/*private List<Subject> subject;*/
+	private String firstName;
+	private String lastName;
+	private String address;
+	private String bloodGroup;
+	private String departmentName;
+	private String employeeType;
 
 	public EmployeeEntity() {
-		super();
 	}
+	
 
-	public EmployeeEntity(Integer employeeId, String fname, String lname, Integer age, String branchName,
-			List<Subject> subject) {
+	public EmployeeEntity(Integer id, Integer age, String firstName, String lastName, String address, String bloodGroup,
+			String departmentName, String employeeType) {
 		super();
-		this.employeeId = employeeId;
-		this.fname = fname;
-		this.lname = lname;
+		this.id = id;
 		this.age = age;
-		this.branchName = branchName;
-		/*this.subject = subject;*/
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.bloodGroup = bloodGroup;
+		this.departmentName = departmentName;
+		this.employeeType = employeeType;
 	}
 
-	public Integer getEmployeeId() {
-		return employeeId;
+
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setEmployeeId(Integer employeeId) {
-		this.employeeId = employeeId;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getFname() {
-		return fname;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setFname(String fname) {
-		this.fname = fname;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	public String getLname() {
-		return lname;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setLname(String lname) {
-		this.lname = lname;
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getBloodGroup() {
+		return bloodGroup;
+	}
+
+	public void setBloodGroup(String bloodGroup) {
+		this.bloodGroup = bloodGroup;
+	}
+
+	public String getDepartmentName() {
+		return departmentName;
+	}
+
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
+
+	public String getEmployeeType() {
+		return employeeType;
+	}
+
+	public void setEmployeeType(String employeeType) {
+		this.employeeType = employeeType;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getAge() {
@@ -57,19 +96,15 @@ public class EmployeeEntity {
 		this.age = age;
 	}
 
-	public String getBranchName() {
-		return branchName;
+
+	@Override
+	public String toString() {
+		return "EmployeeEntity [id=" + id + ", age=" + age + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", address=" + address + ", bloodGroup=" + bloodGroup + ", departmentName=" + departmentName
+				+ ", employeeType=" + employeeType + "]";
 	}
 
-	public void setBranchName(String branchName) {
-		this.branchName = branchName;
-	}
-	/*
-	 * public List<Subject> getSubject() { return subject; }
-	 * 
-	 * public void setSubject(List<Subject> subject) { this.subject = subject; }
-	 */
 	
 	
-
+	
 }

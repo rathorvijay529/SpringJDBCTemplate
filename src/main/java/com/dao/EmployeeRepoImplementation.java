@@ -17,9 +17,9 @@ import com.model.Employee;
 import com.properties.Queries;
 
 @Repository
-public class EmployeeRepoImplement implements EmployeeRepo {
+public class EmployeeRepoImplementation implements EmployeeRepo {
 	private static final Logger logger = Logger
-			.getLogger(EmployeeRepoImplement.class);
+			.getLogger(EmployeeRepoImplementation.class);
 
 	@Autowired
 	private JdbcTemplate jdbctemplate;

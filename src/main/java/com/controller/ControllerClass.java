@@ -17,8 +17,8 @@ import com.service.EmployeeService;
 
 @Controller
 @RequestMapping("/basicURL")
-public class RestController {
-	private static final Logger logger = Logger.getLogger(RestController.class);
+public class ControllerClass {
+	private static final Logger logger = Logger.getLogger(ControllerClass.class);
 	@Autowired
 	private EmployeeService empService;
 

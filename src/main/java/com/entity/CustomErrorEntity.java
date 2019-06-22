@@ -5,22 +5,22 @@ import java.util.List;
 public class CustomErrorEntity {
 
 	private final String TYPE = "CustomErrorEntity";
-	private List<ErrorEntity> MultiErrorList;
+	private List<ErrorResponse> MultiErrorList;
 
 	public CustomErrorEntity() {
 		super();
 	}
 
-	public CustomErrorEntity(List<ErrorEntity> MultiErrorList) {
+	public CustomErrorEntity(List<ErrorResponse> MultiErrorList) {
 		super();
 		this.MultiErrorList = MultiErrorList;
 	}
 
-	public List<ErrorEntity> getMultiErrorList() {
+	public List<ErrorResponse> getMultiErrorList() {
 		return MultiErrorList;
 	}
 
-	public void setMultiErrorList(List<ErrorEntity> multiErrorList) {
+	public void setMultiErrorList(List<ErrorResponse> multiErrorList) {
 		MultiErrorList = multiErrorList;
 	}
 
