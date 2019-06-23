@@ -4,12 +4,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.entity.EmployeeEntity;
@@ -24,12 +27,16 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 	@Autowired
 	private JdbcTemplate jdbctemplate;
 
+	@Autowired
+	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+	// wild card jdbcTemplate implementation
 	public Employee getEmployee(final Integer id) {
 		try {
 			logger.info("Repository Layer Invoked::EmployeeRepoImplement {}");
 			logger.info("Retriving  the Employee is processing method name::getEmployee");
 			logger.info("Argument::" + "id");
-			return jdbctemplate.query(Queries.queryForGettingEmployee,
+			return jdbctemplate.query(Queries.QUERYFORGETTINGEMPLOYEE,
 					new PreparedStatementSetter() {
 
 						public void setValues(PreparedStatement ps)
@@ -64,7 +71,7 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 		logger.info("Repository Layer Invoked::EmployeeRepoImplement");
 		logger.info("Retriving  the Employee is processing method name::getEmployees");
 		logger.info("Argument::" + "");
-		return jdbctemplate.query(Queries.queryForGettingAllEmployee,
+		return jdbctemplate.query(Queries.QUERYFORALLEMPLOYEES,
 				new RowMapper<Employee>() {
 
 					public Employee mapRow(ResultSet resultSet, int rowNum)
@@ -90,7 +97,7 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 			logger.info("Repository Layer Invoked::EmployeeRepoImplement");
 			logger.info("Deleting  the Employee is processing method name::delete");
 			logger.info("Argument::" + "id");
-			jdbctemplate.update(Queries.queryForDeleteEmployee,
+			jdbctemplate.update(Queries.QUERYFORDELETEEMPLOYEE,
 					new PreparedStatementSetter() {
 
 						public void setValues(PreparedStatement ps)
@@ -133,7 +140,7 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 		logger.info("Repository Layer Invoked::EmployeeRepoImplement");
 		logger.info("Updating the Employee is processing method name::updateEmployee");
 		logger.info("Argument::" + emp);
-		jdbctemplate.update(Queries.queryForUpdateEmployee,
+		jdbctemplate.update(Queries.QUERYFORUPDATEEMPLOYEE,
 				new PreparedStatementSetter() {
 
 					public void setValues(PreparedStatement preparedstatement)
@@ -154,4 +161,40 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 		return "updated";
 	}
 
+	// Named Template:
+	public Employee getEmployeeWithNamedParaMeter(Integer id) {
+
+		try {
+			logger.info("Repository Layer Invoked::EmployeeRepoImplement {}");
+			logger.info("Retriving  the Employee is processing method name::getEmployee");
+			logger.info("Argument::" + "id");
+			return namedParameterJdbcTemplate.query(
+					Queries.QUERYFORGETTINGEMPLOYEEWITHNAMEDPARAMETER,
+					new MapSqlParameterSource().addValue("id", id),
+					new RowMapper<Employee>() {
+						public Employee mapRow(ResultSet resultSet, int rowNum)
+								throws SQLException {
+							Employee employee = new Employee();
+							employee.setId(resultSet.getInt(1));
+							employee.setAge(resultSet.getInt(2));
+							employee.setFirstName(resultSet.getString(3));
+							employee.setLastName(resultSet.getString(4));
+							employee.setAddress(resultSet.getString(5));
+							employee.setBloodGroup(resultSet.getString(6));
+							employee.setDepartmentName(resultSet.getString(7));
+							employee.setEmployeeType(resultSet.getString(8));
+							return employee;
+						}
+
+					}).get(0);
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+
+	}
+
+	
+	
+//delete,create by Vijeta
+// update by Rizwan
 }

@@ -15,5 +15,7 @@ public interface EmployeeRepo {
 	public void save(EmployeeEntity emp);
 	
 	public String updateEmployee(EmployeeEntity emp);
+	
+	public Employee getEmployeeWithNamedParaMeter(Integer id);
 
 }
