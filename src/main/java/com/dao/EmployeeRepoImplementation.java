@@ -151,8 +151,6 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 
 	// Named Template:
 	public Employee getEmployeeWithNamedParaMeter(Integer id) {
-
-		try {
 			logger.info("Repository Layer Invoked::EmployeeRepoImplement {}");
 			logger.info("Retriving  the Employee is processing method name::getEmployeeWithNamedParaMeter");
 			logger.info("Argument::" + "id");
@@ -172,16 +170,11 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 						}
 
 					}).get(0);
-		} catch (EmptyResultDataAccessException e) {
-			return null;
-		}
-
+		
 	}
 
 	// Named Template: Save Employee using Named Parameter
 	public void saveEmployeeUsingNamedParaMeter(final EmployeeEntity emp) {
-
-		try {
 			logger.info("Repository Layer Invoked::EmployeeRepoImplement {}");
 			logger.info("Saving  the Employee is processing method name::saveEmployeeUsingNamedParaMeter");
 			logger.info("Argument::" + emp);
@@ -192,22 +185,19 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 							.addValue("departmentName", emp.getDepartmentName())
 							.addValue("employeeType", emp.getEmployeeType()));
 
-		} catch (EmptyResultDataAccessException e) {
-		}
+		
 	}
 	// Named Template: Delete Employee using Named Parameter
 	public void deleteUsingNamedParameterQuery(final Integer id) {
 
-		try {
+		
 			logger.info("Repository Layer Invoked::EmployeeRepoImplement");
 			logger.info("Deleting  the Employee is processing method name::deleteUsingNamedParameterQuery");
 			logger.info("Argument::" + "id");
 			namedParameterJdbcTemplate.update(Queries.QUERY_FOR_DELETE_EMPLOYEE_WITH_NAMED_PARAMETER,
 					new MapSqlParameterSource().addValue("id", id));
 			logger.info("Deleted");
-		} catch (EmptyResultDataAccessException e) {
-
-		}
+		
 	}
 
 }

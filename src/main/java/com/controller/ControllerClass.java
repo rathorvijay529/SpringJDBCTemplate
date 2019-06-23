@@ -95,11 +95,11 @@ public class ControllerClass {
 		try {
 			logger.info("Deleting the employee data started");
 			logger.info("RestAPI::/deleteEmployee");
-			logger.info("HTTP method :: Get");
-			logger.info("RequestBody :: " + "id");
+			logger.info("HTTP method :: DELETE");
+			logger.info("RequestBody :: " + id);
 			empService.processDelete(id);
 			return new ResponseEntity<Object>(
-					new SuccessResponse(HttpStatus.CREATED.value(), HttpStatus.CREATED.toString()), HttpStatus.CREATED);
+					new SuccessResponse(HttpStatus.OK.value(), HttpStatus.OK.toString()), HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -131,11 +131,11 @@ public class ControllerClass {
 		try {
 			logger.info("Deleting the employee data started");
 			logger.info("RestAPI::/deleteEmployeeUsingNamedQuery");
-			logger.info("HTTP method :: Get");
-			logger.info("RequestBody :: " + "id");
+			logger.info("HTTP method :: DELETE");
+			logger.info("RequestBody :: " + id);
 			empService.processDeleteUsingNamedParameter(id);
 			return new ResponseEntity<Object>(
-					new SuccessResponse(HttpStatus.CREATED.value(), HttpStatus.CREATED.toString()), HttpStatus.CREATED);
+					new SuccessResponse(HttpStatus.OK.value(), HttpStatus.OK.toString()), HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -151,7 +151,7 @@ public class ControllerClass {
 			logger.info("Retriving the employee data started");
 			logger.info("RestAPI::/getEmployeeByIDUsingNamedQuery");
 			logger.info("HTTP method :: Get");
-			logger.info("RequestBody :: " + "");
+			logger.info("RequestBody :: " + id);
 			return new ResponseEntity<Object>(empService.processGetEmployeeUsingNamedQuery(id), HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
