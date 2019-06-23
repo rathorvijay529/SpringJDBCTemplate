@@ -31,7 +31,6 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 
 	// wild card jdbcTemplate implementation
 	public Employee getEmployee(final Integer id) {
-		try {
 			logger.info("Repository Layer Invoked::EmployeeRepoImplement {}");
 			logger.info("Retriving  the Employee is processing method name::getEmployee");
 			logger.info("Argument::" + id);
@@ -39,7 +38,7 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 
 				public void setValues(PreparedStatement ps) throws SQLException {
 					ps.setInt(1, id);
-				}
+				}   
 
 			}, new RowMapper<Employee>() {
 
@@ -57,11 +56,7 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 				}
 
 			}).get(0);
-		} catch (EmptyResultDataAccessException e) {
-			return null;
-		}
-
-	}
+			}
 
 	public List<Employee> getEmployees() {
 		logger.info("Repository Layer Invoked::EmployeeRepoImplement");
@@ -116,7 +111,6 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 			}
 
 		});
-		logger.info("Data Inserted Success");
 
 	}
 
@@ -138,7 +132,6 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 			}
 
 		});
-		logger.info("Data Updated Successfully");
 		return null;
 	}
 
