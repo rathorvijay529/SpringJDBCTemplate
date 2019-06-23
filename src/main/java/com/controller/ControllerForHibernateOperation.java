@@ -107,11 +107,11 @@ public class ControllerForHibernateOperation {
 			return new ResponseEntity<>(new ErrorResponse(
 					HttpStatus.INTERNAL_SERVER_ERROR.value(),
 					HttpStatus.INTERNAL_SERVER_ERROR.toString()),
-					HttpStatus.INTERNAL_SERVER_ERROR); 
-
+					HttpStatus.INTERNAL_SERVER_ERROR);  
+ 
 		}
-	}
-	
+	}  
+	 
 	
 	//delete, update---vijeta
 	//getEmployee, save-- rizwan
