@@ -3,17 +3,17 @@ package com.service;
 import java.util.List;
 
 import com.entity.EmployeeEntity;
+import com.model.Employee;
 
 public interface EmployeeService {
+	public Employee processGetEmployee(Integer id);
 
-	public Boolean processingSaveEmployee(EmployeeEntity employeeEntity);
-
-	public EmployeeEntity getEmployee(Integer empId);
-
-	public List<EmployeeEntity> getEmployees();
-
-	public Boolean deleteEmployee(Integer empId);
-
-	public EmployeeEntity updateEmployee(Integer empId);
-
+	public List<Employee> processGetEmployees();
+	
+	public void processDelete(Integer id);
+	
+	public void processSave(EmployeeEntity emp);
+	
+	public String processUpdateEmployee(EmployeeEntity emp);
+ 
 }

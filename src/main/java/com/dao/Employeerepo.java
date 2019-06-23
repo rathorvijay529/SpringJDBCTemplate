@@ -1,20 +1,19 @@
 package com.dao;
 
 import java.util.List;
+
 import com.entity.EmployeeEntity;
+import com.model.Employee;
 
-public interface Employeerepo {
+public interface EmployeeRepo {
+	public Employee getEmployee(Integer id);
 
-	public Integer save(EmployeeEntity employeeEntity);
-
-	public List<EmployeeEntity> getListOfEmployee();
-
-	public EmployeeEntity getEmployee(Integer empId);
-
-	public Boolean deleteEmployee(Integer empId);
-
-	public EmployeeEntity updateEmployee(Integer empId);
+	public List<Employee> getEmployees();
 	
-	public Integer saveWithNamedParameter(EmployeeEntity employeeEntity);
+	public void delete(int id);
+	
+	public void save(EmployeeEntity emp);
+	
+	public String updateEmployee(EmployeeEntity emp);
 
 }
