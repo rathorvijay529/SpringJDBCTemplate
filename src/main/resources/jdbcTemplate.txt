@@ -1,0 +1,35 @@
+
+JDBCtemplate: Spring provide feature to interat with db using jdbc.it provides jdbcTemplate.(Abstraction)
+
+advantage:
+============
+No boiler plate code.(no connection,no transaction,no session creation(automatically))
+No need to handle  transaction ,spring automatically handling.
+no need to commit transaction.
+no need to close resources which we are opening.
+
+parameter:
+============
+1.Wildcard(?)(JDBCTemplate) 
+2.NamedParameter(:)(NamedJDBCTemplate)
+
+Callback interfaces:
+======================
+
+1.PreparedStateMentSetter
+Method: public void setValues( PreparedStatement ps);
+
+2. RowMapper<Object>(query the data)
+Method: public Object  mapRow(ResultSet rs,int rowNum);
+
+
+3. ResultSetExtractor<List<Object>> (query the data)
+Method:public List<Object> extractData(ResultSet rs)
+
+
+NamedParaMeter:
+===================
+Class:
+MapSqlParameterSource
+
+method:addValue(namedParameterName,namedParameterNameValue)
