@@ -119,10 +119,32 @@ public class EmployeeServiceImplementation implements EmployeeService {
 			throw new MissingParameterInThePayLoad(new CustomErrorEntity(
 					errlist));
 		logger.info("Updating Layer Invoking is completed");
-		return (empRepo.updateEmployee(employeeEntity) == 1) ? "Data  deleted Successfully"
-				: "Data does not deleted";
+		return (empRepo.updateEmployee(employeeEntity) == 1) ? "Data  Updated Successfully"
+				: "Data does not Updated";
+	}
+	
+	public List<Employee> processGetEmployeesUsingNamedQuery() {
+		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
+		logger.info("Retriving the Employee is processing method name::processGetEmployeesUsingNamedQuery");
+		logger.info("Argument::" + "");
+		return  empRepo.getEmployeesWithNamedParaMete();
 	}
 
+	public String processUpdateEmployeeUsingNamedQuery(EmployeeEntity employeeEntity) {
+		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
+		logger.info("Updating the Employee is processing method name::processUpdateEmployeeUsingNamedQuery");
+		logger.info("Argument::" + employeeEntity);
+		List<ErrorResponse> errlist = payLoadValidation(employeeEntity);
+		if (errlist.size() == 0)
+			empRepo.updateEmployeeWithNamedParaMete(employeeEntity);
+		else
+			throw new MissingParameterInThePayLoad(new CustomErrorEntity(
+					errlist));
+		logger.info("Updating Layer Invoking is completed");
+		return (empRepo.updateEmployeeWithNamedParaMete(employeeEntity) == 1) ? "Data  Updated Successfully"
+				: "Data does not Update";
+	}
+	
 	private List<ErrorResponse> payLoadValidation(EmployeeEntity employeeEntity) {
 
 		List<ErrorResponse> errorList = new ArrayList<ErrorResponse>();
@@ -183,6 +205,7 @@ public class EmployeeServiceImplementation implements EmployeeService {
 	public EmployeeEntity convertEmployee(Employee employee) {
 		EmployeeEntity employeeEntity = new EmployeeEntity();
 		employeeEntity.setId(employee.getId());
+		employeeEntity.setAge(employee.getAge());
 
 		return employeeEntity;
 	}

@@ -47,4 +47,16 @@ public class EmployeeServiceForHibarnateOperation implements EmployeeService {
 		return null;
 	}
 
+
+	public List<Employee> processGetEmployeesUsingNamedQuery() {
+
+		return null;
+	}
+
+
+	public String processUpdateEmployeeUsingNamedQuery(EmployeeEntity em) {
+
+		return null;
+	}
+
 }

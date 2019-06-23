@@ -21,4 +21,8 @@ public interface EmployeeService {
 	public String processDeleteUsingNamedParameter(Integer id);
 	
 	public Employee processGetEmployeeUsingNamedQuery(Integer id);
+	
+	public List<Employee> processGetEmployeesUsingNamedQuery();
+	
+	public String processUpdateEmployeeUsingNamedQuery(EmployeeEntity em);
 }

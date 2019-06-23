@@ -21,5 +21,9 @@ public interface EmployeeRepo {
 	public Integer saveEmployeeUsingNamedParaMeter(EmployeeEntity emp);
 	
 	public Integer  deleteUsingNamedParameterQuery(Integer id);
+	
+	public List<Employee> getEmployeesWithNamedParaMete();
+	
+	public Integer updateEmployeeWithNamedParaMete(EmployeeEntity emp);
 
 }

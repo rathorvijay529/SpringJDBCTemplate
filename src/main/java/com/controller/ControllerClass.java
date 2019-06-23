@@ -181,5 +181,44 @@ public class ControllerClass {
 				HttpStatus.NO_CONTENT);
 
 	}
+	
+	@RequestMapping(value = "/getEmployeesUsingNamedQuery", method = RequestMethod.GET)
+	public ResponseEntity<Object> getEmployeesUsingNamedQuery() {
+		try {
+			logger.info("Retriving the employee data started");
+			logger.info("RestAPI::/getEmployeesByIDUsingNamedQuery");
+			logger.info("HTTP method :: Get");
+			logger.info("RequestBody :: {}" +" ");
+			return new ResponseEntity<Object>(empService.processGetEmployeesUsingNamedQuery(),
+					HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return new ResponseEntity<Object>(
+				new SuccessResponse(HttpStatus.NO_CONTENT.value(),
+						HttpStatus.NO_CONTENT.toString()),
+				HttpStatus.NO_CONTENT);
+
+	}
+	
+	@RequestMapping(value = "/updateEmpDataUsingNamedQuery", method = RequestMethod.PUT)
+	public ResponseEntity<Object> updateEmpDataUsingNamedQuery(@RequestBody EmployeeEntity emp) {
+		try {
+			logger.info("Updating the Employee Data Started");
+			logger.info("In the RestAPI::/updateEmpDataUsingNamedQuery");
+			logger.info("HTTP Method Post");
+			logger.info("Request Body ::" + emp);
+
+			return new ResponseEntity<Object>(new SuccessResponse(
+					HttpStatus.OK.value(),
+					empService.processUpdateEmployeeUsingNamedQuery(emp)), HttpStatus.OK);
+
+		} catch (MissingParameterInThePayLoad exception) {
+			logger.error(exception.getMessage());
+			return new ResponseEntity<Object>(exception.getCustomErrorEntity(),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 
 }

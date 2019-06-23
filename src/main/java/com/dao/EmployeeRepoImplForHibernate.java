@@ -48,4 +48,16 @@ public class EmployeeRepoImplForHibernate extends AbstractDAO implements
 		return null;
 	}
 
+
+	public List<Employee> getEmployeesWithNamedParaMete() {
+
+		return null;
+	}
+
+	@Override
+	public Integer updateEmployeeWithNamedParaMete(EmployeeEntity emp) {
+
+		return null;
+	}
+
 }
