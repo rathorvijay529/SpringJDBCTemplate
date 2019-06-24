@@ -33,3 +33,7 @@ Class:
 MapSqlParameterSource
 
 method:addValue(namedParameterName,namedParameterNameValue)
+
+ResultSet:
+===========
+ResultSet represent data in the form of table .
