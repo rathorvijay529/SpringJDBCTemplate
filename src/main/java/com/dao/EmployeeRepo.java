@@ -10,16 +10,16 @@ public interface EmployeeRepo {
 
 	public List<Employee> getEmployees();
 	
-	public void delete(Integer id);
+	public Integer delete(Integer id);
 	
-	public void save(EmployeeEntity emp);
+	public Integer save(EmployeeEntity emp);
 	
-	public String updateEmployee(EmployeeEntity emp);
+	public Integer updateEmployee(EmployeeEntity emp);
 	
 	public Employee getEmployeeWithNamedParaMeter(Integer id);
 	
-	public void saveEmployeeUsingNamedParaMeter(EmployeeEntity emp);
+	public Integer saveEmployeeUsingNamedParaMeter(EmployeeEntity emp);
 	
-	public void  deleteUsingNamedParameterQuery(Integer id);
+	public Integer  deleteUsingNamedParameterQuery(Integer id);
 
 }

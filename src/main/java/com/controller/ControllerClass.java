@@ -18,23 +18,26 @@ import com.service.EmployeeService;
 @Controller
 @RequestMapping("/basicURL")
 public class ControllerClass {
-	private static final Logger logger = Logger.getLogger(ControllerClass.class);
+	private static final Logger logger = Logger
+			.getLogger(ControllerClass.class);
 	@Autowired
 	private EmployeeService empService;
 
 	@RequestMapping(value = "/getEmployees", method = RequestMethod.GET)
 	public ResponseEntity<Object> getEmployee() {
 		try {
-			logger.info("Retriving the employee data started");
+			logger.info("Retriving the employee data started {}");
 			logger.info("RestAPI::/getEmployees");
-			logger.info("HTTP method :: Get");
-			logger.info("RequestBody :: " + "");
-			return new ResponseEntity<Object>(empService.processGetEmployees(), HttpStatus.OK);
+			logger.info("HTTP method :: Get {}");
+			logger.info("RequestBody ::{}" + "");
+			return new ResponseEntity<Object>(empService.processGetEmployees(),
+					HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
 		return new ResponseEntity<Object>(
-				new SuccessResponse(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.toString()),
+				new SuccessResponse(HttpStatus.NO_CONTENT.value(),
+						HttpStatus.NO_CONTENT.toString()),
 				HttpStatus.NO_CONTENT);
 
 	}
@@ -45,13 +48,15 @@ public class ControllerClass {
 			logger.info("Retriving the employee data started");
 			logger.info("RestAPI::/getEmployeeById");
 			logger.info("HTTP method :: Get");
-			logger.info("RequestBody :: " + "");
-			return new ResponseEntity<Object>(empService.processGetEmployee(id), HttpStatus.OK);
+			logger.info("RequestBody ::{}" + id);
+			return new ResponseEntity<Object>(
+					empService.processGetEmployee(id), HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
 		return new ResponseEntity<Object>(
-				new SuccessResponse(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.toString()),
+				new SuccessResponse(HttpStatus.NO_CONTENT.value(),
+						HttpStatus.NO_CONTENT.toString()),
 				HttpStatus.NO_CONTENT);
 
 	}
@@ -61,15 +66,17 @@ public class ControllerClass {
 		try {
 			logger.info("Saving the Employee Data Started");
 			logger.info("In the RestAPI::/saveEmpData");
-			logger.info("HTTP Method Post");
-			logger.info("Request Body ::" + emp);
-			empService.processSave(emp);
-			return new ResponseEntity<Object>(
-					new SuccessResponse(HttpStatus.CREATED.value(), HttpStatus.CREATED.toString()), HttpStatus.CREATED);
+			logger.info("HTTP Method ::Post");
+			logger.info("Request Body ::{}" + emp);
+
+			return new ResponseEntity<Object>(new SuccessResponse(
+					HttpStatus.CREATED.value(), empService.processSave(emp)),
+					HttpStatus.CREATED);
 
 		} catch (MissingParameterInThePayLoad exception) {
 			logger.error(exception.getMessage());
-			return new ResponseEntity<Object>(exception.getCustomErrorEntity(), HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<Object>(exception.getCustomErrorEntity(),
+					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -80,13 +87,15 @@ public class ControllerClass {
 			logger.info("In the RestAPI::/updateEmpData");
 			logger.info("HTTP Method Post");
 			logger.info("Request Body ::" + emp);
-			empService.processUpdateEmployee(emp);
-			return new ResponseEntity<Object>(new SuccessResponse(HttpStatus.OK.value(), HttpStatus.OK.toString()),
-					HttpStatus.OK);
+
+			return new ResponseEntity<Object>(new SuccessResponse(
+					HttpStatus.OK.value(),
+					empService.processUpdateEmployee(emp)), HttpStatus.OK);
 
 		} catch (MissingParameterInThePayLoad exception) {
 			logger.error(exception.getMessage());
-			return new ResponseEntity<Object>(exception.getCustomErrorEntity(), HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<Object>(exception.getCustomErrorEntity(),
+					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -96,68 +105,79 @@ public class ControllerClass {
 			logger.info("Deleting the employee data started");
 			logger.info("RestAPI::/deleteEmployee");
 			logger.info("HTTP method :: DELETE");
-			logger.info("RequestBody :: " + id);
-			empService.processDelete(id);
-			return new ResponseEntity<Object>(
-					new SuccessResponse(HttpStatus.OK.value(), HttpStatus.OK.toString()), HttpStatus.OK);
+			logger.info("RequestBody ::{}" + id);
+			return new ResponseEntity<Object>(new SuccessResponse(
+					HttpStatus.OK.value(), empService.processDelete(id)),
+					HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
 		return new ResponseEntity<Object>(
-				new SuccessResponse(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.toString()),
+				new SuccessResponse(HttpStatus.NO_CONTENT.value(),
+						HttpStatus.NO_CONTENT.toString()),
 				HttpStatus.NO_CONTENT);
 
 	}
 
 	@RequestMapping(value = "/saveEmpDataUsingNameQuery", method = RequestMethod.POST)
-	public ResponseEntity<Object> saveEmpDataUsingNameQuery(@RequestBody EmployeeEntity emp) {
+	public ResponseEntity<Object> saveEmpDataUsingNameQuery(
+			@RequestBody EmployeeEntity emp) {
 		try {
 			logger.info("Saving the Employee Data Started");
 			logger.info("In the RestAPI::/saveEmpDataUsingNameQuery");
 			logger.info("HTTP Method Post");
 			logger.info("Request Body ::" + emp);
-			empService.processSave(emp);
-			return new ResponseEntity<Object>(
-					new SuccessResponse(HttpStatus.CREATED.value(), HttpStatus.CREATED.toString()), HttpStatus.CREATED);
 
+			return new ResponseEntity<Object>(new SuccessResponse(
+					HttpStatus.CREATED.value(), empService.processSave(emp)),
+					HttpStatus.CREATED);
 		} catch (MissingParameterInThePayLoad exception) {
 			logger.error(exception.getMessage());
-			return new ResponseEntity<Object>(exception.getCustomErrorEntity(), HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<Object>(exception.getCustomErrorEntity(),
+					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	@RequestMapping(value = "/deleteEmployeeUsingNamedQuery", method = RequestMethod.DELETE)
-	public ResponseEntity<Object> deleteEmployeeUsingNamedQuery(@RequestParam("id") Integer id) {
+	public ResponseEntity<Object> deleteEmployeeUsingNamedQuery(
+			@RequestParam("id") Integer id) {
 		try {
 			logger.info("Deleting the employee data started");
 			logger.info("RestAPI::/deleteEmployeeUsingNamedQuery");
 			logger.info("HTTP method :: DELETE");
 			logger.info("RequestBody :: " + id);
-			empService.processDeleteUsingNamedParameter(id);
-			return new ResponseEntity<Object>(
-					new SuccessResponse(HttpStatus.OK.value(), HttpStatus.OK.toString()), HttpStatus.OK);
+
+			return new ResponseEntity<Object>(new SuccessResponse(
+					HttpStatus.OK.value(),
+					empService.processDeleteUsingNamedParameter(id)),
+					HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
 		return new ResponseEntity<Object>(
-				new SuccessResponse(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.toString()),
+				new SuccessResponse(HttpStatus.NO_CONTENT.value(),
+						HttpStatus.NO_CONTENT.toString()),
 				HttpStatus.NO_CONTENT);
 
 	}
-	
+
 	@RequestMapping(value = "/getEmployeeByIDUsingNamedQuery", method = RequestMethod.GET)
-	public ResponseEntity<Object> getEmployeeByIDUsingNamedQuery(@RequestParam("id") Integer id) {
+	public ResponseEntity<Object> getEmployeeByIDUsingNamedQuery(
+			@RequestParam("id") Integer id) {
 		try {
 			logger.info("Retriving the employee data started");
 			logger.info("RestAPI::/getEmployeeByIDUsingNamedQuery");
 			logger.info("HTTP method :: Get");
 			logger.info("RequestBody :: " + id);
-			return new ResponseEntity<Object>(empService.processGetEmployeeUsingNamedQuery(id), HttpStatus.OK);
+			return new ResponseEntity<Object>(
+					empService.processGetEmployeeUsingNamedQuery(id),
+					HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
 		return new ResponseEntity<Object>(
-				new SuccessResponse(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.toString()),
+				new SuccessResponse(HttpStatus.NO_CONTENT.value(),
+						HttpStatus.NO_CONTENT.toString()),
 				HttpStatus.NO_CONTENT);
 
 	}

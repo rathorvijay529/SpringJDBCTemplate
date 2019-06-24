@@ -10,15 +10,15 @@ public interface EmployeeService {
 
 	public List<Employee> processGetEmployees();
 
-	public void processDelete(Integer id);
+	public String processDelete(Integer id);
 
-	public void processSave(EmployeeEntity emp);
+	public String processSave(EmployeeEntity emp);
 
 	public String processUpdateEmployee(EmployeeEntity emp);
 
-	public void processSaveUsingNamedParameter(EmployeeEntity employeeEntity);
+	public String processSaveUsingNamedParameter(EmployeeEntity employeeEntity);
 
-	public void processDeleteUsingNamedParameter(Integer id);
+	public String processDeleteUsingNamedParameter(Integer id);
 	
 	public Employee processGetEmployeeUsingNamedQuery(Integer id);
 }

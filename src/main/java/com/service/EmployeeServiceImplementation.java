@@ -21,7 +21,8 @@ import com.properties.ErrorCodeMessages;
  */
 @Service
 public class EmployeeServiceImplementation implements EmployeeService {
-	private static final Logger logger = Logger.getLogger(EmployeeServiceImplementation.class);
+	private static final Logger logger = Logger
+			.getLogger(EmployeeServiceImplementation.class);
 	@Autowired
 	private EmployeeRepo empRepo;
 
@@ -30,7 +31,8 @@ public class EmployeeServiceImplementation implements EmployeeService {
 		logger.info("Retriving the Employee is processing method name::processGetEmployee");
 		logger.info("Argument::" + "id");
 		if (payLoadValidationForID(id).size() != 0)
-			throw new MissingParameterInThePayLoad(new CustomErrorEntity(payLoadValidationForID(id)));
+			throw new MissingParameterInThePayLoad(new CustomErrorEntity(
+					payLoadValidationForID(id)));
 		return empRepo.getEmployee(id);
 	}
 
@@ -39,7 +41,8 @@ public class EmployeeServiceImplementation implements EmployeeService {
 		logger.info("Retriving the Employee is processing method name::processGetEmployeeUsingNamedQuery");
 		logger.info("Argument::" + "id");
 		if (payLoadValidationForID(id).size() != 0)
-			throw new MissingParameterInThePayLoad(new CustomErrorEntity(payLoadValidationForID(id)));
+			throw new MissingParameterInThePayLoad(new CustomErrorEntity(
+					payLoadValidationForID(id)));
 		return empRepo.getEmployeeWithNamedParaMeter(id);
 	}
 
@@ -50,50 +53,59 @@ public class EmployeeServiceImplementation implements EmployeeService {
 		return empRepo.getEmployees();
 	}
 
-	public void processDelete(Integer id) {
+	public String processDelete(Integer id) {
 		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
 		logger.info("Deleting the Employee is processing, method name::processDelete");
 		logger.info("Argument::" + "id");
 		if (payLoadValidationForID(id).size() != 0)
-			throw new MissingParameterInThePayLoad(new CustomErrorEntity(payLoadValidationForID(id)));
-		empRepo.delete(id);
+			throw new MissingParameterInThePayLoad(new CustomErrorEntity(
+					payLoadValidationForID(id)));
 		logger.info("Delete is completed");
+		return (empRepo.delete(id) == 1) ? "Data Successfully deleted"
+				: "Data does not deleted";
+
 	}
 
-	public void processSave(EmployeeEntity employeeEntity) {
+	public String processSave(EmployeeEntity employeeEntity) {
 		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
 		logger.info("Saving the Employee is processing method name::processSave");
 		logger.info("Argument::" + employeeEntity);
 		List<ErrorResponse> errlist = payLoadValidation(employeeEntity);
-		if (errlist.size() == 0)
-			empRepo.save(employeeEntity);
-		else
-			throw new MissingParameterInThePayLoad(new CustomErrorEntity(errlist));
-
+		if (errlist.size() != 0)
+			throw new MissingParameterInThePayLoad(new CustomErrorEntity(
+					errlist));
 		logger.info("Saving Layer Invoking is completed");
+		return empRepo.save(employeeEntity) == 1 ? "Data saved successfully"
+				: "Data does not saved successfully";
 	}
 
-	public void processSaveUsingNamedParameter(EmployeeEntity employeeEntity) {
+	public String processSaveUsingNamedParameter(EmployeeEntity employeeEntity) {
 		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
 		logger.info("Saving the Employee is processing method name::processSaveUsingNamedParameter");
 		logger.info("Argument::" + employeeEntity);
 		List<ErrorResponse> errlist = payLoadValidation(employeeEntity);
-		if (errlist.size() == 0)
-			empRepo.saveEmployeeUsingNamedParaMeter(employeeEntity);// using named parameter
-		else
-			throw new MissingParameterInThePayLoad(new CustomErrorEntity(errlist));
+		if (errlist.size() != 0)
+
+			throw new MissingParameterInThePayLoad(new CustomErrorEntity(
+					errlist));
 
 		logger.info("Saving Layer Invoking is completed");
+		return empRepo.saveEmployeeUsingNamedParaMeter(employeeEntity) == 1 ? "Data saved successfully"
+				: "Data does not saved successfully";
+
 	}
 
-	public void processDeleteUsingNamedParameter(Integer id) {
+	public String processDeleteUsingNamedParameter(Integer id) {
 		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
 		logger.info("Deleting the Employee is processing, method name::processDeleteUsingNamedParameter");
 		logger.info("Argument::" + "id");
 		if (payLoadValidationForID(id).size() != 0)
-			throw new MissingParameterInThePayLoad(new CustomErrorEntity(payLoadValidationForID(id)));
-		empRepo.deleteUsingNamedParameterQuery(id);
+			throw new MissingParameterInThePayLoad(new CustomErrorEntity(
+					payLoadValidationForID(id)));
 		logger.info("Delete is completed");
+		return (empRepo.deleteUsingNamedParameterQuery(id) == 1) ? "Data Successfully deleted"
+				: "Data does not deleted";
+
 	}
 
 	public String processUpdateEmployee(EmployeeEntity employeeEntity) {
@@ -104,46 +116,56 @@ public class EmployeeServiceImplementation implements EmployeeService {
 		if (errlist.size() == 0)
 			empRepo.updateEmployee(employeeEntity);
 		else
-			throw new MissingParameterInThePayLoad(new CustomErrorEntity(errlist));
-
+			throw new MissingParameterInThePayLoad(new CustomErrorEntity(
+					errlist));
 		logger.info("Updating Layer Invoking is completed");
-		return empRepo.updateEmployee(employeeEntity);
+		return (empRepo.updateEmployee(employeeEntity) == 1) ? "Data  deleted Successfully"
+				: "Data does not deleted";
 	}
 
 	private List<ErrorResponse> payLoadValidation(EmployeeEntity employeeEntity) {
 
 		List<ErrorResponse> errorList = new ArrayList<ErrorResponse>();
 		if (null == employeeEntity.getId())
-			errorList.add(new ErrorResponse(ErrorCodeMessages.MISSING_EMPID.getCode(),
-					ErrorCodeMessages.MISSING_EMPID.getDescription()));
+			errorList.add(new ErrorResponse(ErrorCodeMessages.MISSING_EMPID
+					.getCode(), ErrorCodeMessages.MISSING_EMPID
+					.getDescription()));
 
 		if (null == employeeEntity.getAge())
-			errorList.add(new ErrorResponse(ErrorCodeMessages.MISSING_AGE.getCode(),
-					ErrorCodeMessages.MISSING_AGE.getDescription()));
+			errorList
+					.add(new ErrorResponse(ErrorCodeMessages.MISSING_AGE
+							.getCode(), ErrorCodeMessages.MISSING_AGE
+							.getDescription()));
 
 		if (null == employeeEntity.getAddress())
-			errorList.add(new ErrorResponse(ErrorCodeMessages.MISSING_ADDRESS.getCode(),
-					ErrorCodeMessages.MISSING_ADDRESS.getDescription()));
+			errorList.add(new ErrorResponse(ErrorCodeMessages.MISSING_ADDRESS
+					.getCode(), ErrorCodeMessages.MISSING_ADDRESS
+					.getDescription()));
 
 		if (null == employeeEntity.getBloodGroup())
-			errorList.add(new ErrorResponse(ErrorCodeMessages.MISSING_BLOODGROUP.getCode(),
+			errorList.add(new ErrorResponse(
+					ErrorCodeMessages.MISSING_BLOODGROUP.getCode(),
 					ErrorCodeMessages.MISSING_BLOODGROUP.getDescription()));
 
 		if (null == employeeEntity.getDepartmentName())
-			errorList.add(new ErrorResponse(ErrorCodeMessages.MISSING_DEPARTMENTNAME.getCode(),
+			errorList.add(new ErrorResponse(
+					ErrorCodeMessages.MISSING_DEPARTMENTNAME.getCode(),
 					ErrorCodeMessages.MISSING_DEPARTMENTNAME.getDescription()));
 
 		if (null == employeeEntity.getEmployeeType())
-			errorList.add(new ErrorResponse(ErrorCodeMessages.MISSING_EMPLOYEETYPE.getCode(),
+			errorList.add(new ErrorResponse(
+					ErrorCodeMessages.MISSING_EMPLOYEETYPE.getCode(),
 					ErrorCodeMessages.MISSING_EMPLOYEETYPE.getDescription()));
 
 		if (null == employeeEntity.getFirstName())
-			errorList.add(new ErrorResponse(ErrorCodeMessages.MISSING_FIRSTNAME.getCode(),
-					ErrorCodeMessages.MISSING_FIRSTNAME.getDescription()));
+			errorList.add(new ErrorResponse(ErrorCodeMessages.MISSING_FIRSTNAME
+					.getCode(), ErrorCodeMessages.MISSING_FIRSTNAME
+					.getDescription()));
 
 		if (null == employeeEntity.getLastName())
-			errorList.add(new ErrorResponse(ErrorCodeMessages.MISSING_LASTNAME.getCode(),
-					ErrorCodeMessages.MISSING_LASTNAME.getDescription()));
+			errorList.add(new ErrorResponse(ErrorCodeMessages.MISSING_LASTNAME
+					.getCode(), ErrorCodeMessages.MISSING_LASTNAME
+					.getDescription()));
 
 		return errorList;
 	}
@@ -152,8 +174,9 @@ public class EmployeeServiceImplementation implements EmployeeService {
 
 		List<ErrorResponse> errorList = new ArrayList<ErrorResponse>();
 		if (null == id)
-			errorList.add(new ErrorResponse(ErrorCodeMessages.MISSING_EMPID.getCode(),
-					ErrorCodeMessages.MISSING_EMPID.getDescription()));
+			errorList.add(new ErrorResponse(ErrorCodeMessages.MISSING_EMPID
+					.getCode(), ErrorCodeMessages.MISSING_EMPID
+					.getDescription()));
 
 		return errorList;
 	}
