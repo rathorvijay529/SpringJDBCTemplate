@@ -1,5 +1,9 @@
 package com.controller;
 
+
+
+import javax.swing.text.html.FormSubmitEvent.MethodType;
+
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +27,7 @@ public class ControllerForHibernateOperation {
 			.getLogger(ControllerForHibernateOperation.class);
 	private EmployeeServiceForHibarnateOperation employeeServiceForHibarnateOperation;
 
-	@RequestMapping(value = "/getEmployees", method = RequestMethod.GET)
+	@RequestMapping(value = "/getEmployees",method = RequestMethod.GET)
 	public ResponseEntity<Object> getEmployees() {
 		try {
 			logger.info("Invoking ofgetEmployees started");
@@ -112,6 +116,62 @@ public class ControllerForHibernateOperation {
 		}
 	}  
 	 
+	@RequestMapping(value = "/updateEmployeesData" , method = RequestMethod.PUT)
+	public ResponseEntity<Object> updateEmployeesData(@RequestBody EmployeeEntity employeeEntity) {
+		try {
+			logger.info("Invoking of updateEmployeesData started");
+			logger.info("Controller::ControllerForHibernateOperation");
+			logger.info("Method::updateEmployeesData");
+			logger.info("HTTP Method::PUT");
+			logger.info("URL::/updateEmployeesData");
+			logger.info("Arguments::" + employeeEntity);
+			return new ResponseEntity<Object>(
+					employeeServiceForHibarnateOperation.processUpdateEmployee(employeeEntity),
+					HttpStatus.OK);
+
+		} catch (MissingParameterInThePayLoad missingParameterInThePayLoad) {
+			logger.error(missingParameterInThePayLoad);
+			return new ResponseEntity<>(new ErrorResponse(
+					HttpStatus.INTERNAL_SERVER_ERROR.value(),
+					HttpStatus.INTERNAL_SERVER_ERROR.toString()),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch (RuntimeException exception) {
+			logger.error(exception);
+			return new ResponseEntity<>(new ErrorResponse(
+					HttpStatus.INTERNAL_SERVER_ERROR.value(),
+					HttpStatus.INTERNAL_SERVER_ERROR.toString()),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+
+		}
+	}
+	@RequestMapping(value = "/updateEmployeesData" , method = RequestMethod.DELETE)
+	public ResponseEntity<Object> deleteEmployeeData(@RequestParam("id") Integer id) {
+		try {
+			logger.info("Invoking of deleteEmployeeData started");
+			logger.info("Controller::ControllerForHibernateOperation");
+			logger.info("Method::deleteEmployeeData");
+			logger.info("HTTP Method::DELETE");
+			logger.info("URL::/updateEmployeesData");
+			logger.info("Arguments::" + id);
+			return new ResponseEntity<Object>(
+					employeeServiceForHibarnateOperation.processDelete(id),
+					HttpStatus.OK);
+
+		} catch (MissingParameterInThePayLoad missingParameterInThePayLoad) {
+			logger.error(missingParameterInThePayLoad);
+			return new  ResponseEntity<>(new ErrorResponse(
+					HttpStatus.NO_CONTENT.value(),
+					HttpStatus.NO_CONTENT.toString()),
+					HttpStatus.NO_CONTENT);
+		} catch (RuntimeException exception) {
+			logger.error(exception);
+			return  new ResponseEntity<>(new ErrorResponse(
+					HttpStatus.NO_CONTENT.value(),
+					HttpStatus.NO_CONTENT.toString()),
+					HttpStatus.NO_CONTENT);
+
+		}
+	}
 	
 	//delete, update---vijeta
 	//getEmployee, save-- rizwan
