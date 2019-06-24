@@ -47,4 +47,7 @@ public class ControllerForHibernateOperation {
 
 		}
 	}
+	
+	//delete, update---vijeta
+	//getEmployee, save-- rizwan
 }
