@@ -26,14 +26,14 @@ public class EmployeeServiceImplementation implements EmployeeService {
 	@Autowired
 	private EmployeeRepo empRepo;
 
-	public Employee processGetEmployee(Integer id) {
+	public EmployeeEntity processGetEmployee(Integer id) {
 		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
 		logger.info("Retriving the Employee is processing method name::processGetEmployee");
 		logger.info("Argument::" + "id");
 		if (payLoadValidationForID(id).size() != 0)
 			throw new MissingParameterInThePayLoad(new CustomErrorEntity(
 					payLoadValidationForID(id)));
-		return empRepo.getEmployee(id);
+		return convertEmployee(empRepo.getEmployee(id));
 	}
 
 	public Employee processGetEmployeeUsingNamedQuery(Integer id) {
@@ -171,7 +171,6 @@ public class EmployeeServiceImplementation implements EmployeeService {
 	}
 
 	private List<ErrorResponse> payLoadValidationForID(Integer id) {
-
 		List<ErrorResponse> errorList = new ArrayList<ErrorResponse>();
 		if (null == id)
 			errorList.add(new ErrorResponse(ErrorCodeMessages.MISSING_EMPID
@@ -179,6 +178,13 @@ public class EmployeeServiceImplementation implements EmployeeService {
 					.getDescription()));
 
 		return errorList;
+	}
+
+	public EmployeeEntity convertEmployee(Employee employee) {
+		EmployeeEntity employeeEntity = new EmployeeEntity();
+		employeeEntity.setId(employee.getId());
+
+		return employeeEntity;
 	}
 
 }

@@ -1,23 +1,40 @@
 package com.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Epmloyee_Table")
 public class Employee {
+	@Id
+	@Column(name = "Emp_id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	@Column(name = "Emp_age")
 	private int age;
+	@Column(name = "Emp_firstName")
 	private String firstName;
+	@Column(name = "Emp_lastName")
 	private String lastName;
+	@Column(name = "Emp_address")
 	private String address;
+	@Column(name = "Emp_bloodGroup")
 	private String bloodGroup;
+	@Column(name = "Emp_departmentName")
 	private String departmentName;
+	@Column(name = "Emp_employeeType")
 	private String employeeType;
 
 	public Employee() {
 	}
 
-	public Employee(int id, int age, String firstName, String lastName, String address, String bloodGroup,
-			String departmentName, String employeeType) {
+	public Employee(int id, int age, String firstName, String lastName,
+			String address, String bloodGroup, String departmentName,
+			String employeeType) {
 		super();
 		this.id = id;
 		this.age = age;
@@ -95,9 +112,10 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", age=" + age + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", address=" + address + ", bloodGroup=" + bloodGroup + ", departmentName=" + departmentName
-				+ ", employeeType=" + employeeType + "]";
+		return "Employee [id=" + id + ", age=" + age + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", address=" + address
+				+ ", bloodGroup=" + bloodGroup + ", departmentName="
+				+ departmentName + ", employeeType=" + employeeType + "]";
 	}
 
 }

@@ -6,7 +6,7 @@ import com.entity.EmployeeEntity;
 import com.model.Employee;
 
 public interface EmployeeService {
-	public Employee processGetEmployee(Integer id);
+	public EmployeeEntity processGetEmployee(Integer id);
 
 	public List<Employee> processGetEmployees();
 
