@@ -1,9 +1,5 @@
 package com.controller;
 
-
-
-import javax.swing.text.html.FormSubmitEvent.MethodType;
-
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
