@@ -55,7 +55,7 @@ public class ControllerClass {
 			logger.info("Retriving the employee data started");
 			logger.info("RestAPI::/getEmployeeById");
 			logger.info("HTTP method :: Get");
-			logger.info("RequestBody ::{}" + id);
+			logger.info("RequestBody ::" + id);
 			return new ResponseEntity<>(empService.processGetEmployee(id),
 					HttpStatus.OK);
 		} catch (Exception e) {
@@ -235,7 +235,6 @@ public class ControllerClass {
 			@RequestBody AddressEntity address) {
 		try {
 			logger.info("Invoking saveAddressDetails started");
-			logger.info("Controller::ControllerForHibernateOperation");
 			logger.info("Method::saveAddressDetails");
 			logger.info("HTTP Method::POST");
 			logger.info("URL::/saveAddressDetails");
@@ -266,7 +265,6 @@ public class ControllerClass {
 			@RequestBody DepartmentEntity departmentEntity) {
 		try {
 			logger.info("Invoking saveDepartmentDetails started");
-			logger.info("Controller::ControllerForHibernateOperation");
 			logger.info("Method::saveDepartmentDetails");
 			logger.info("HTTP Method::POST");
 			logger.info("URL::/saveDepartmentDetails");
@@ -297,7 +295,6 @@ public class ControllerClass {
 			@RequestParam("id") Integer id) {
 		try {
 			logger.info("Invoking getAllDetailsByEmployeeId started");
-			logger.info("Controller::ControllerForHibernateOperation");
 			logger.info("Method::getAllDetailsByEmployeeId");
 			logger.info("HTTP Method::GET");
 			logger.info("URL::/getAllDetailsByEmployeeId");

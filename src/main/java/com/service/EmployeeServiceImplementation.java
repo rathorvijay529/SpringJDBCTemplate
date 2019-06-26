@@ -243,9 +243,6 @@ public class EmployeeServiceImplementation implements EmployeeService {
 		EmployeeEntity employeeEntity = null;
 		AddressEntity addressEntity = null;
 		DepartmentEntity departmentEntity = null;
-		System.out.println(employee);
-		System.out.println(address);
-		System.out.println(department);
 		if (employee != null) {
 			employeeEntity = new EmployeeEntity();
 			employeeEntity.setId(employee.getId());
