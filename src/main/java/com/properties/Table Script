@@ -1,0 +1,58 @@
+
+
+Address Table:-
+
+CREATE DATABASE IF NOT EXISTS TESTING;
+ 
+USE TESTING;
+  
+CREATE TABLE address(
+   employeeId int not null,
+   addressId int not null auto_increment primary key,
+   fullAddress varchar(355) not null,
+   city varchar(100) not null,
+   pincode int not null,
+   FOREIGN KEY fk_employee(employeeId)
+   REFERENCES employee(employeeId)
+   ON UPDATE CASCADE
+   ON DELETE RESTRICT
+)ENGINE=InnoDB;
+
+
+
+Employee Table:-
+Alter script:-
+ALTER TABLE employee CHANGE  COLUMN id  employeeId int;
+
+
+Department Table:-  
+
+CREATE DATABASE IF NOT EXISTS TESTING;
+ 
+USE TESTING;
+  
+CREATE TABLE Department(
+   employeeId int not null,
+   departmentId int not null auto_increment primary key,
+   departmentName varchar(355) not null,
+   NumberOfEmployees int not null,
+   FOREIGN KEY fk_employee(employeeId)
+   REFERENCES employee(employeeId)
+   ON UPDATE CASCADE
+   ON DELETE RESTRICT
+)ENGINE=InnoDB;
+
+
+Employee Table Script:-
+
+CREATE TABLE employee
+(employeeId int(11) NOT NULL,
+age int(11) NOT NULL, 
+firstName char(50) DEFAULT NULL, 
+lastName varchar(6) NOT NULL,
+address varchar(60) NOT NULL, 
+bloodGroup varchar(9) NOT NULL,
+departmentName varchar(20) NOT NULL, 
+employeeType varchar(20) NOT NULL,
+PRIMARY KEY (employeeId))
+    ENGINE=InnoDB DEFAULT CHARSET=latin1

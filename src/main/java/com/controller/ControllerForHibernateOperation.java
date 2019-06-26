@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.customException.MissingParameterInThePayLoad;
-import com.entity.EmployeeEntity;
-import com.entity.ErrorResponse;
-import com.entity.SuccessResponse;
+import com.model.EmployeeEntity;
+import com.model.ErrorResponse;
+import com.model.SuccessResponse;
 import com.service.EmployeeServiceForHibarnateOperation;
 
 @Controller
@@ -169,6 +169,5 @@ public class ControllerForHibernateOperation {
 		}
 	}
 	
-	//delete, update---vijeta
-	//getEmployee, save-- rizwan
+	
 }
