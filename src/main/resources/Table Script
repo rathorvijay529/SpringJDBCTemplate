@@ -5,6 +5,20 @@ Address Table:-
 CREATE DATABASE IF NOT EXISTS TESTING;
  
 USE TESTING;
+
+
+CREATE TABLE employee
+(employeeId int(11) NOT NULL,
+age int(11) NOT NULL, 
+firstName char(50) DEFAULT NULL, 
+lastName varchar(6) NOT NULL,
+address varchar(60) NOT NULL, 
+bloodGroup varchar(9) NOT NULL,
+departmentName varchar(20) NOT NULL, 
+employeeType varchar(20) NOT NULL,
+PRIMARY KEY (employeeId))
+    ENGINE=InnoDB DEFAULT CHARSET=latin1
+    
   
 CREATE TABLE address(
    employeeId int not null,
@@ -19,18 +33,6 @@ CREATE TABLE address(
 )ENGINE=InnoDB;
 
 
-
-Employee Table:-
-Alter script:-
-ALTER TABLE employee CHANGE  COLUMN id  employeeId int;
-
-
-Department Table:-  
-
-CREATE DATABASE IF NOT EXISTS TESTING;
- 
-USE TESTING;
-  
 CREATE TABLE Department(
    employeeId int not null,
    departmentId int not null auto_increment primary key,
@@ -43,16 +45,22 @@ CREATE TABLE Department(
 )ENGINE=InnoDB;
 
 
-Employee Table Script:-
+Insert into Employee (employeeId,age,firstName,lastName,address,bloodGroup,departmentName,employeeType) 
+values (1002,22,"Vijeta","Bopche","Noida","O","Medical","P");
 
-CREATE TABLE employee
-(employeeId int(11) NOT NULL,
-age int(11) NOT NULL, 
-firstName char(50) DEFAULT NULL, 
-lastName varchar(6) NOT NULL,
-address varchar(60) NOT NULL, 
-bloodGroup varchar(9) NOT NULL,
-departmentName varchar(20) NOT NULL, 
-employeeType varchar(20) NOT NULL,
-PRIMARY KEY (employeeId))
-    ENGINE=InnoDB DEFAULT CHARSET=latin1
+Insert into Address(employeeId,addressID,fullAddress,city,pincode)
+values(1002,120,"noida","noida",980021);
+
+Insert into Department(employeeId,departmentId,departmentName,NumberOfEmployees)
+values(1002,1009,"XYZ",50);
+
+
+
+
+
+    
+    
+    
+    
+    
+    
