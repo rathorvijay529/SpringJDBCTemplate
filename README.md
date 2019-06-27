@@ -41,7 +41,8 @@ step:4: <installed facet="jst.web" version="3.1"/>  to <installed facet="jst.web
 •    git push origin develop (pushing develop branch.
 
  ```
-##Committing the changes to develop using git bash:
+## Committing the changes to develop using git bash:
+
 ```bash
 •    Go to the project directory and right click and open git bash.
 •    use the following commands to commit and push the code.
