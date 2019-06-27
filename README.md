@@ -1,13 +1,16 @@
-# SpringJDBCTemplate
+# SpringJDBCTemplate 
+
+This is project is all about to learn spring concepts only.we are using JDBCTemplate and Hibernate
+
 
 ## Installation Eclipse 
-```bash
+<u>
 step:1:Go to New,select import and choose git
 step:2:Select clone URI (copy the URL from repository)
 step:3:Right click on ur project and Select configure.
 step:4:select convert to maven
 step:5:maven install
-```
+<u>
 
 
 
