@@ -4,13 +4,14 @@ This is project is all about to learn spring concepts only.we are using JDBCTemp
 
 
 ## Installation Eclipse 
-
+```bash
 •	Go to New, select import and choose git
 •	Select clone URI (copy the URL from the repository)
 •	Right-click on ur project and Select configure.
 •	Select convert to maven
 •	maven install
 
+ ```
 ## Server problem(unable to include project into Apache Tomcat)(optional)
 ```bash
 •	select Windows-->show views-->others-->Navigators
