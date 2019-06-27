@@ -280,7 +280,7 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 		logger.info("Repository Layer Invoked::EmployeeRepoImplement {}");
 		logger.info("Retriving  the Employee is processing method name::getEmployeeWithNamedParaMeter");
 		logger.info("Argument::" + id);
-		return namedParameterJdbcTemplate.query(Queries.QUERY_FOR_GETTING_EMPLOYEE_By_ID_WITH_NAMED_PARAMETER,
+		return namedParameterJdbcTemplate.query(Queries.GET_DEPARTMENT_WIH_NAMED_PARAMETER,
 				new MapSqlParameterSource().addValue("id", id), new RowMapper<Department>() {
 					public Department mapRow(ResultSet resultSet, int rowNum) throws SQLException {
 						Department department = new Department();
