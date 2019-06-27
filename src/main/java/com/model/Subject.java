@@ -1,5 +1,4 @@
-package com.entity;
-
+package com.model;
 public class Subject {
 	private Integer subjectId;
 	private String subjectName;

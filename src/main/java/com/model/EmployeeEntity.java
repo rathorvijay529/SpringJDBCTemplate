@@ -1,4 +1,4 @@
-package com.entity;
+package com.model;
 
 import javax.persistence.Entity;
 
@@ -13,6 +13,8 @@ public class EmployeeEntity {
 	private String bloodGroup;
 	private String departmentName;
 	private String employeeType;
+	private AddressEntity addressDetails;
+	private DepartmentEntity departmentDetails;
 
 	public EmployeeEntity() {
 	}
@@ -94,6 +96,26 @@ public class EmployeeEntity {
 
 	public void setAge(Integer age) {
 		this.age = age;
+	}
+
+
+	public AddressEntity getAddressDetails() {
+		return addressDetails;
+	}
+
+
+	public void setAddressDetails(AddressEntity addressDetails) {
+		this.addressDetails = addressDetails;
+	}
+
+
+	public DepartmentEntity getDepartmentDetails() {
+		return departmentDetails;
+	}
+
+
+	public void setDepartmentDetails(DepartmentEntity departmentDetails) {
+		this.departmentDetails = departmentDetails;
 	}
 
 

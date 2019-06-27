@@ -1,0 +1,118 @@
+
+getEmployeeByIDUsingNamedQuery:- 
+
+URL:-
+http://localhost:8080/SpringJDBCTemplate/rest/basicURL/getEmployeeByIDUsingNamedQuery?id=1002
+
+Output:-
+{
+    "id": 1002,
+    "age": 22,
+    "firstName": "Vijeta",
+    "lastName": "Bopche",
+    "address": "Noida",
+    "bloodGroup": "O",
+    "departmentName": "Medical",
+    "employeeType": "P"
+}
+
+-----------------------------------------------------------------------------------------------------------------------------
+deleteEmployee:-
+
+URL:-
+http://localhost:8080/SpringJDBCTemplate/rest/basicURL/deleteEmployee?id=128
+Output:-
+{
+    "successCode": 200,
+    "successMessage": "Data Successfully deleted"
+}
+
+---------------------------------------------------------------------------------------------------------------------------
+deleteEmployeeUsingNamedQuery
+URL:-
+http://localhost:8080/SpringJDBCTemplate/rest/basicURL/deleteEmployeeUsingNamedQuery?id=6666
+
+Output:-
+{
+    "successCode": 200,
+    "successMessage": "Data Successfully deleted"
+}
+------------------------------------------------------------------------------------------------------------------------------
+getEmployees:-
+url:-
+
+http://localhost:8080/SpringJDBCTemplate/rest/basicURL/getEmployees
+
+o/p:-
+[
+    {
+        "id": 1002,
+        "age": 22,
+        "firstName": "Vijeta",
+        "lastName": "Bopche",
+        "address": "Noida",
+        "bloodGroup": "O",
+        "departmentName": "Medical",
+        "employeeType": "P"
+    },
+    {
+        "id": 3333,
+        "age": 22,
+        "firstName": "ggggg",
+        "lastName": "yyyyy",
+        "address": "Noida",
+        "bloodGroup": "O",
+        "departmentName": "Medical",
+        "employeeType": "P"
+    },
+    {
+        "id": 6666,
+        "age": 22,
+        "firstName": "ggggg",
+        "lastName": "yyyyy",
+        "address": "Noida",
+        "bloodGroup": "O",
+        "departmentName": "Medical",
+        "employeeType": "P"
+    }
+]
+
+----------------------------------------------------------------------------------------------------------------------------
+getEmployeesUsingNamedQuery
+
+URL-
+http://localhost:8080/SpringJDBCTemplate/rest/basicURL/getEmployeesUsingNamedQuery
+
+Output:-
+[
+    {
+        "id": 1002,
+        "age": 22,
+        "firstName": "Vijeta",
+        "lastName": "Bopche",
+        "address": "Noida",
+        "bloodGroup": "O",
+        "departmentName": "Medical",
+        "employeeType": "P"
+    },
+    {
+        "id": 3333,
+        "age": 22,
+        "firstName": "ggggg",
+        "lastName": "yyyyy",
+        "address": "Noida",
+        "bloodGroup": "O",
+        "departmentName": "Medical",
+        "employeeType": "P"
+    },
+    {
+        "id": 6666,
+        "age": 22,
+        "firstName": "ggggg",
+        "lastName": "yyyyy",
+        "address": "Noida",
+        "bloodGroup": "O",
+        "departmentName": "Medical",
+        "employeeType": "P"
+    }
+]
