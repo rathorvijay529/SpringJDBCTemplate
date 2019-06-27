@@ -1,0 +1,58 @@
+Spring mvc:
+
+UI--->servlet dispatcher class(web.xml)(deployment descriptor)--->view resolver, handler mapping--- request to controller.
+1.mapping
+2.view resolver
+2.1:prefix(pkg name for all views)
+2.2:suffix(.jsp)
+
+
+
+
+web.xml
+1.servlet mapping
+2.view resolver file configuration.
+
+
+
+web.xml
+========
+<servlet>
+    <servlet-name>mvc-dispatcher</servlet-name>
+    <servlet-class>
+        org.springframework.web.servlet.DispatcherServlet
+    </servlet-class>
+</servlet>
+<!--handler mapping  -->
+<servlet-mapping>
+    <servlet-name>mvc-dispatcher</servlet-name>
+    <url-pattern>/</url-pattern>
+</servlet-mapping>
+
+
+<!--View resolver  mapping  -->
+<context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/mvc-dispatcher-servlet.xml</param-value>
+</context-param>
+
+
+mvc-dispatcher-servlet.xml
+=============================
+<bean id="viewResolver"
+      class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+    <property name="prefix" value="/WEB-INF/jsp/"/>
+    <property name="suffix" value=".jsp"/>
+</bean>
+
+Now a days we are using like this
+====================================
+html,angular
+js(node.js,react.js,jquery,javascript)
+
+
+
+
+
+

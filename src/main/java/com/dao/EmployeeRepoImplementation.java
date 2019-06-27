@@ -14,11 +14,15 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.entity.EmployeeEntity;
-import com.model.Employee;
+import com.entity.Address;
+import com.entity.Department;
+import com.entity.Employee;
+import com.model.AddressEntity;
+import com.model.DepartmentEntity;
+import com.model.EmployeeEntity;
 import com.properties.Queries;
 
-@Repository
+@Repository("employeeRepoForJDBC")
 public class EmployeeRepoImplementation implements EmployeeRepo {
 	private static final Logger logger = Logger.getLogger(EmployeeRepoImplementation.class);
 
@@ -211,5 +215,85 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 		namedParameters.addValue("employeeType", emp.getEmployeeType());
 		namedParameters.addValue("id", emp.getId());
 		return namedParameterJdbcTemplate.update(Queries.QUERY_FOR_UPDATE_EMPLOYEE_WITH_NAMED_PARAMETER, namedParameters);
+		
 	}
+	@Override
+	public Integer saveAddressDetails(AddressEntity address) {
+		logger.info("Repository Layer Invoked::EmployeeRepoImplement");
+		logger.info("Saving the Employee is processing method name::saveAddressDetails");
+		logger.info("Argument::" + address);
+		return jdbctemplate.update(Queries.INSERT_ADDRESS, new PreparedStatementSetter() {
+			public void setValues(PreparedStatement preparedstatement) throws SQLException {
+				preparedstatement.setInt(1, address.getEmployeeId());
+				preparedstatement.setInt(2, address.getAddressId());
+				preparedstatement.setString(3, address.getFullAddress());
+				preparedstatement.setString(4, address.getCity());
+				preparedstatement.setInt(5, address.getPincode());
+			}
+
+		});
+
+	}
+
+	@Override
+	public Integer saveDepartmentDetails(DepartmentEntity departmentEntity) {
+		logger.info("Repository Layer Invoked::EmployeeRepoImplement");
+		logger.info("Saving the Employee is processing method name::saveDepartmentDetails");
+		logger.info("Argument::" + departmentEntity);
+		return jdbctemplate.update(Queries.INSERT_DEPARTMENT, new PreparedStatementSetter() {
+			public void setValues(PreparedStatement preparedstatement) throws SQLException {
+				preparedstatement.setInt(1, departmentEntity.getEmployeeId());
+				preparedstatement.setInt(2, departmentEntity.getDepartmentId());
+				preparedstatement.setString(3, departmentEntity.getDepartmentName());
+				preparedstatement.setInt(4, departmentEntity.getNumberOfEmployees());
+
+			}
+
+		});
+
+	}
+	@Override
+	// Named Template:
+	public Address getAddressWithNamedParaMeter(Integer id) {
+		logger.info("Repository Layer Invoked::EmployeeRepoImplement {}");
+		logger.info("Retriving  the Employee is processing method name::getEmployeeWithNamedParaMeter");
+		logger.info("Argument::" + id);
+		return namedParameterJdbcTemplate.query(Queries.GET_ADDRESS_WIH_NAMED_PARAMETER,
+				new MapSqlParameterSource().addValue("id", id), new RowMapper<Address>() {
+					public Address mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+						Address address = new Address();
+						address.setEmployeeId(resultSet.getInt(1));
+						address.setAddressId(resultSet.getInt(2));
+						address.setFullAddress(resultSet.getString(3));
+						address.setCity(resultSet.getString(4));
+						address.setPincode(resultSet.getInt(5));
+						return address;
+					}
+
+				}).get(0);
+
+	}
+
+	@Override
+	// Named Template:
+	public Department getDepartmentWithNamedParaMeter(Integer id) {
+		logger.info("Repository Layer Invoked::EmployeeRepoImplement {}");
+		logger.info("Retriving  the Employee is processing method name::getEmployeeWithNamedParaMeter");
+		logger.info("Argument::" + id);
+		return namedParameterJdbcTemplate.query(Queries.GET_DEPARTMENT_WIH_NAMED_PARAMETER,
+				new MapSqlParameterSource().addValue("id", id), new RowMapper<Department>() {
+					public Department mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+						Department department = new Department();
+						department.setEmployeeId(resultSet.getInt(1));
+						department.setDepartmentId(resultSet.getInt(2));
+						department.setDepartmentName(resultSet.getString(3));
+						department.setNumberOfEmployees(resultSet.getInt(4));
+						return department;
+					}
+
+				}).get(0);
+
+	}
+
+
 }

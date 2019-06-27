@@ -2,8 +2,12 @@ package com.dao;
 
 import java.util.List;
 
-import com.entity.EmployeeEntity;
-import com.model.Employee;
+import com.entity.Address;
+import com.entity.Department;
+import com.entity.Employee;
+import com.model.AddressEntity;
+import com.model.DepartmentEntity;
+import com.model.EmployeeEntity;
 
 public class EmployeeRepoImplForHibernate extends AbstractDAO implements
 		EmployeeRepo {
@@ -57,6 +61,30 @@ public class EmployeeRepoImplForHibernate extends AbstractDAO implements
 	@Override
 	public Integer updateEmployeeWithNamedParaMete(EmployeeEntity emp) {
 
+		return null;
+	}
+
+	@Override
+	public Integer saveAddressDetails(AddressEntity address) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer saveDepartmentDetails(DepartmentEntity departmentEntity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Address getAddressWithNamedParaMeter(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Department getDepartmentWithNamedParaMeter(Integer id) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

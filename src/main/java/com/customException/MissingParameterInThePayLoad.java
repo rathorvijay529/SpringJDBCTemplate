@@ -1,6 +1,6 @@
 package com.customException;
 
-import com.entity.CustomErrorEntity;
+import com.model.CustomErrorEntity;
 
 public class MissingParameterInThePayLoad extends RuntimeException {
 	private CustomErrorEntity customErrorEntity;

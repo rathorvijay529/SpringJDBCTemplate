@@ -2,8 +2,10 @@ package com.service;
 
 import java.util.List;
 
-import com.entity.EmployeeEntity;
-import com.model.Employee;
+import com.entity.Employee;
+import com.model.AddressEntity;
+import com.model.DepartmentEntity;
+import com.model.EmployeeEntity;
 
 public class EmployeeServiceForHibarnateOperation implements EmployeeService {
 
@@ -56,6 +58,24 @@ public class EmployeeServiceForHibarnateOperation implements EmployeeService {
 
 	public String processUpdateEmployeeUsingNamedQuery(EmployeeEntity em) {
 
+		return null;
+	}
+
+	@Override
+	public String processSaveAddressDetails(AddressEntity address) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String processSaveDepartmentDetails(DepartmentEntity departmentEntity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public EmployeeEntity getEmployeeDetailsByID(Integer id) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
