@@ -51,7 +51,8 @@ step:4: <installed facet="jst.web" version="3.1"/>  to <installed facet="jst.web
 •    git commit
 •    git push origin develop
 •    Go to GitHub and check whether changes have pushed to repo or not.
-•    Raise the pull request in git hub to push the changes in master. (There should not be any conflicts)(PR will review by approver and then merged if all ok)
+•    Raise the pull request in git hub to push the changes in master. 
+(There should not be any conflicts)(PR will review by approver and then merged if all ok)
 
  ```
  
