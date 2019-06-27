@@ -4,24 +4,20 @@ This is project is all about to learn spring concepts only.we are using JDBCTemp
 
 
 ## Installation Eclipse 
-<u>
-step:1: Go to New, select import and choose git
-step:2: Select clone URI (copy the URL from the repository)
-step:3: Right-click on ur project and Select configure.
-step:4: Select convert to maven
-step:5: maven install
-<u>
 
-
-
-
+•	Go to New, select import and choose git
+•	Select clone URI (copy the URL from the repository)
+•	Right-click on ur project and Select configure.
+•	Select convert to maven
+•	maven install
 
 ## Server problem(unable to include project into Apache Tomcat)(optional)
 ```bash
-step:1: select Windows-->show views-->others-->Navigators
-step:2: Go to project ,open .settings file
-step:3:open *facet.core.xml
-step:4: <installed facet="jst.web" version="3.1"/>  to <installed facet="jst.web" version="2.5"/>
+•	select Windows-->show views-->others-->Navigators
+•	Go to project ,open .settings file
+•	open *facet.core.xml
+•	<installed facet="jst.web" version="3.1"/>  to <installed facet="jst.web" version="2.5"/>
+
  ```
 
 
