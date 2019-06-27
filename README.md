@@ -16,7 +16,7 @@ step:5:maven install
 
 
 
-## Server problem(unable to include project into apache tomcate)(optional)
+## Server problem(unable to include project into apache tomcat)(optional)
 ```bash
 step:1: select Windows-->show views-->others-->Navigators
 step:2: Go to project ,open .settings file
