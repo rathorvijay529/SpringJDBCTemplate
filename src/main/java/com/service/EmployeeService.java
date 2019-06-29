@@ -35,4 +35,6 @@ public interface EmployeeService {
 	public EmployeeMO getEmployeeDetailsByID(Integer id);
 	
 	public EmployeeMO processUpdateEmployeeForHibernate(EmployeeMO emp);
+	
+	public EmployeeMO processSaveForHibernate(EmployeeMO emp);
 }

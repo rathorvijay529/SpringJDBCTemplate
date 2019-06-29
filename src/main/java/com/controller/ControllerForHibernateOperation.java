@@ -94,27 +94,19 @@ public class ControllerForHibernateOperation {
 			logger.debug("HTTP Method::POST");
 			logger.debug("URL::/saveEmployee");
 			logger.debug("Arguments::" + emp);
-			return new ResponseEntity<Object>(
-					new SuccessResponseMO(
-							HttpStatus.CREATED.value(), employeeService.processSave(emp)),
-							HttpStatus.CREATED);
-
+			return new ResponseEntity<Object>(employeeService.processSaveForHibernate(emp), HttpStatus.CREATED);
 
 		} catch (MissingParameterInThePayLoad missingParameterInThePayLoad) {
 			logger.error(missingParameterInThePayLoad);
-			return new ResponseEntity<>(new ErrorResponseMO(
-					HttpStatus.INTERNAL_SERVER_ERROR.value(),
-					HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()),
+			return new ResponseEntity<>(missingParameterInThePayLoad.getCustomErrorEntity(),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (RuntimeException exception) {
 			logger.error(exception);
-			return new ResponseEntity<>(new ErrorResponseMO(
-					HttpStatus.INTERNAL_SERVER_ERROR.value(),
-					HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()),
-					HttpStatus.INTERNAL_SERVER_ERROR);  
- 
+			return new ResponseEntity<>(new ErrorResponseMO(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+					HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()), HttpStatus.INTERNAL_SERVER_ERROR);
+
 		}
-	}  
+	}
 	 
 	@RequestMapping(value = "/updateEmployeesData" , method = RequestMethod.PUT)
 	public ResponseEntity<Object> updateEmployeesData(@RequestBody EmployeeMO employeeEntity) {

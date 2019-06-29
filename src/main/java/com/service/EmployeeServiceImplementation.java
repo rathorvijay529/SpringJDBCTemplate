@@ -37,7 +37,7 @@ public class EmployeeServiceImplementation implements EmployeeService {
 		logger.info("Argument::" + "id");
 		if (payLoadValidationForID(id).size() != 0)
 			throw new MissingParameterInThePayLoad(new CustomErrorMO(payLoadValidationForID(id)));
-		return convertEmployee(empRepo.getEmployee(id));
+		return convertEmployeeEntityToModel(empRepo.getEmployee(id));
 	}
 
 	public Employee processGetEmployeeUsingNamedQuery(Integer id) {
@@ -74,7 +74,7 @@ public class EmployeeServiceImplementation implements EmployeeService {
 		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
 		logger.info("Saving the Employee is processing method name::processSave");
 		logger.info("Argument::" + employeeEntity);
-		List<ErrorResponseMO> errlist = payLoadValidation(employeeEntity);
+		List<ErrorResponseMO> errlist = payLoadValidation(employeeEntity, false);
 		if (errlist.size() != 0)
 			throw new MissingParameterInThePayLoad(new CustomErrorMO(errlist));
 		logger.info("Saving Layer Invoking is completed");
@@ -85,7 +85,7 @@ public class EmployeeServiceImplementation implements EmployeeService {
 		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
 		logger.info("Saving the Employee is processing method name::processSaveUsingNamedParameter");
 		logger.info("Argument::" + employeeEntity);
-		List<ErrorResponseMO> errlist = payLoadValidation(employeeEntity);
+		List<ErrorResponseMO> errlist = payLoadValidation(employeeEntity, false);
 		if (errlist.size() != 0)
 
 			throw new MissingParameterInThePayLoad(new CustomErrorMO(errlist));
@@ -112,7 +112,7 @@ public class EmployeeServiceImplementation implements EmployeeService {
 		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
 		logger.info("Updating the Employee is processing method name::processUpdateEmployee");
 		logger.info("Argument::" + employeeEntity);
-		List<ErrorResponseMO> errlist = payLoadValidation(employeeEntity);
+		List<ErrorResponseMO> errlist = payLoadValidation(employeeEntity, false);
 		if (errlist.size() == 0)
 			empRepo.updateEmployee(employeeEntity);
 		else
@@ -132,7 +132,7 @@ public class EmployeeServiceImplementation implements EmployeeService {
 		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
 		logger.info("Updating the Employee is processing method name::processUpdateEmployeeUsingNamedQuery");
 		logger.info("Argument::" + employeeEntity);
-		List<ErrorResponseMO> errlist = payLoadValidation(employeeEntity);
+		List<ErrorResponseMO> errlist = payLoadValidation(employeeEntity, false);
 		if (errlist.size() == 0)
 			empRepo.updateEmployeeWithNamedParaMete(employeeEntity);
 		else
@@ -188,17 +188,30 @@ public class EmployeeServiceImplementation implements EmployeeService {
 
 	}
 
-	public static EmployeeMO convertEmployee(Employee employee) {
-		EmployeeMO employeeEntity = new EmployeeMO();
-		employeeEntity.setId(employee.getId());
-		employeeEntity.setFirstName(employee.getFirstName());
-		employeeEntity.setLastName(employee.getLastName());
-		employeeEntity.setAge(employee.getAge());
-		employeeEntity.setBloodGroup(employee.getBloodGroup());
-		employeeEntity.setDepartmentName(employee.getDepartmentName());
-		employeeEntity.setEmployeeType(employee.getEmployeeType());
-		employeeEntity.setAddress(employee.getAddress());
-		return employeeEntity;
+	public static EmployeeMO convertEmployeeEntityToModel(Employee employee) {
+		EmployeeMO employeeMo = new EmployeeMO();
+		employeeMo.setId(employee.getId());
+		employeeMo.setFirstName(employee.getFirstName());
+		employeeMo.setLastName(employee.getLastName());
+		employeeMo.setAge(employee.getAge());
+		employeeMo.setBloodGroup(employee.getBloodGroup());
+		employeeMo.setDepartmentName(employee.getDepartmentName());
+		employeeMo.setEmployeeType(employee.getEmployeeType());
+		employeeMo.setAddress(employee.getAddress());
+		return employeeMo;
+	}
+	
+	public static Employee convertEmployeeModelToEntity(EmployeeMO employeeMO) {
+		Employee employee = new Employee();
+		//employee.setId(employeeMO.getId());
+		employee.setFirstName(employeeMO.getFirstName());
+		employee.setLastName(employeeMO.getLastName());
+		employee.setAge(employeeMO.getAge());
+		employee.setBloodGroup(employeeMO.getBloodGroup());
+		employee.setDepartmentName(employeeMO.getDepartmentName());
+		employee.setEmployeeType(employeeMO.getEmployeeType());
+		employee.setAddress(employeeMO.getAddress());
+		return employee;
 	}
 
 	public static List<ErrorResponseMO> payLoadValidationforAddress(AddressMO addressEntity) {
@@ -281,13 +294,15 @@ public class EmployeeServiceImplementation implements EmployeeService {
 
 	}
 
-	public static List<ErrorResponseMO> payLoadValidation(EmployeeMO employeeEntity) {
+	public static List<ErrorResponseMO> payLoadValidation(
+			EmployeeMO employeeEntity, boolean hibernateFlag) {
 
 		List<ErrorResponseMO> errorList = new ArrayList<ErrorResponseMO>();
-		if (null == employeeEntity.getId())
-			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_EMPID.getCode(),
-					ErrorCodeMessages.MISSING_EMPID.getDescription()));
-
+		
+		if (null == employeeEntity.getId()&&!hibernateFlag)
+			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_EMPID
+					.getCode(), ErrorCodeMessages.MISSING_EMPID
+					.getDescription()));
 		if (null == employeeEntity.getAge())
 			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_AGE.getCode(),
 					ErrorCodeMessages.MISSING_AGE.getDescription()));
@@ -343,7 +358,11 @@ public class EmployeeServiceImplementation implements EmployeeService {
 
 	@Override
 	public EmployeeMO processUpdateEmployeeForHibernate(EmployeeMO emp) {
-		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public EmployeeMO processSaveForHibernate(EmployeeMO emp) {
 		return null;
 	}
 

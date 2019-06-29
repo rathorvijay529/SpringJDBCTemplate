@@ -26,7 +26,7 @@ public class EmployeeServiceForHibarnateOperation extends AbstractDAO implements
 		if (EmployeeServiceImplementation.payLoadValidationForID(id).size() != 0)
 			throw new MissingParameterInThePayLoad(
 					new CustomErrorMO(EmployeeServiceImplementation.payLoadValidationForID(id)));
-		return EmployeeServiceImplementation.convertEmployee(employeeRepoForHibernate.getEmployee(id));
+		return EmployeeServiceImplementation.convertEmployeeEntityToModel(employeeRepoForHibernate.getEmployee(id));
 	}
 
 
@@ -39,17 +39,22 @@ public class EmployeeServiceForHibarnateOperation extends AbstractDAO implements
 		return null;
 	}
 
-	public String processSave(EmployeeMO emp) {
+	public EmployeeMO processSaveForHibernate(EmployeeMO emp) {
+		if (EmployeeServiceImplementation.payLoadValidation(emp, true).size() != 0)
+			throw new MissingParameterInThePayLoad(
+					new CustomErrorMO((EmployeeServiceImplementation.payLoadValidation(emp, true))));
 
-		return null;
+		return EmployeeServiceImplementation.convertEmployeeEntityToModel(
+				employeeRepoForHibernate.save(EmployeeServiceImplementation.convertEmployeeModelToEntity(emp)));
 	}
+
 
 	public EmployeeMO processUpdateEmployeeForHibernate(EmployeeMO emp) {
 
-		List<ErrorResponseMO> errlist = EmployeeServiceImplementation.payLoadValidation(emp);
+		List<ErrorResponseMO> errlist = EmployeeServiceImplementation.payLoadValidation(emp, false);
 		if (errlist.size() != 0)
 			throw new MissingParameterInThePayLoad(new CustomErrorMO(errlist));
-		return EmployeeServiceImplementation.convertEmployee(employeeRepoForHibernate.updateEmployeeForHibernate(emp));
+		return EmployeeServiceImplementation.convertEmployeeEntityToModel(employeeRepoForHibernate.updateEmployeeForHibernate(emp));
 	}
 
 	// non used
@@ -98,6 +103,13 @@ public class EmployeeServiceForHibarnateOperation extends AbstractDAO implements
 
 	@Override
 	public String processUpdateEmployee(EmployeeMO emp) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String processSave(EmployeeMO emp) {
 		// TODO Auto-generated method stub
 		return null;
 	}
