@@ -12,7 +12,7 @@ public class HelloWorldController{
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView helloWorld(){
  
-		ModelAndView model = new ModelAndView("welcome");
+		ModelAndView model = new ModelAndView("index");
 		model.addObject("msg", "Hello World");
 		return model;
 	}
