@@ -1,16 +1,16 @@
 package com.model;
 
-public class DepartmentEntity {
+public class DepartmentMO {
 	private Integer employeeId;
 	private Integer departmentId;
 	private String departmentName;
 	private Integer numberOfEmployees;
 
-	public DepartmentEntity() {
+	public DepartmentMO() {
 		super();
 	}
 
-	public DepartmentEntity(Integer employeeId, Integer departmentId, String departmentName, Integer numberOfEmployees) {
+	public DepartmentMO(Integer employeeId, Integer departmentId, String departmentName, Integer numberOfEmployees) {
 		super();
 		this.employeeId = employeeId;
 		this.departmentId = departmentId;

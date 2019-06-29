@@ -1,17 +1,17 @@
 package com.model;
 
-public class AddressEntity {
+public class AddressMO {
 	private Integer employeeId;
 	private Integer addressId;
 	private String fullAddress;
 	private String city;
 	private Integer pincode;
 
-	public AddressEntity() {
+	public AddressMO() {
 		super();
 	}
 
-	public AddressEntity(Integer employeeId, Integer addressId, String fullAddress, String city, Integer pincode) {
+	public AddressMO(Integer employeeId, Integer addressId, String fullAddress, String city, Integer pincode) {
 		super();
 		this.employeeId = employeeId;
 		this.addressId = addressId;

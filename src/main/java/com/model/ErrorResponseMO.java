@@ -1,10 +1,10 @@
 package com.model;
 
-public class ErrorResponse {
+public class ErrorResponseMO {
 	private Integer errorCode;
 	private String errorMSG;
 
-	public ErrorResponse(Integer errorCode, String errorMSG) {
+	public ErrorResponseMO(Integer errorCode, String errorMSG) {
 		super();
 		this.errorCode = errorCode;
 		this.errorMSG = errorMSG;

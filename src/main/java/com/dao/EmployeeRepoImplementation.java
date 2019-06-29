@@ -17,9 +17,9 @@ import org.springframework.stereotype.Repository;
 import com.entity.Address;
 import com.entity.Department;
 import com.entity.Employee;
-import com.model.AddressEntity;
-import com.model.DepartmentEntity;
-import com.model.EmployeeEntity;
+import com.model.AddressMO;
+import com.model.DepartmentMO;
+import com.model.EmployeeMO;
 import com.properties.Queries;
 
 @Repository("employeeRepoForJDBC")
@@ -92,7 +92,7 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 
 	}
 
-	public Integer save(final EmployeeEntity emp) {
+	public Integer save(final EmployeeMO emp) {
 		logger.info("Repository Layer Invoked::EmployeeRepoImplement");
 		logger.info("Saving the Employee is processing method name::save");
 		logger.info("Argument::" + emp);
@@ -112,7 +112,7 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 
 	}
 
-	public Integer updateEmployee(final EmployeeEntity emp) {
+	public Integer updateEmployee(final EmployeeMO emp) {
 		logger.info("Repository Layer Invoked::EmployeeRepoImplement");
 		logger.info("Updating the Employee is processing method name::updateEmployee");
 		logger.info("Argument::" + emp);
@@ -156,7 +156,7 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 	}
 
 	// Named Template: Save Employee using Named Parameter
-	public Integer saveEmployeeUsingNamedParaMeter(final EmployeeEntity emp) {
+	public Integer saveEmployeeUsingNamedParaMeter(final EmployeeMO emp) {
 		logger.info("Repository Layer Invoked::EmployeeRepoImplement {}");
 		logger.info("Saving  the Employee is processing method name::saveEmployeeUsingNamedParaMeter");
 		logger.info("Argument::" + emp);
@@ -201,7 +201,7 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 	}
 
 	// Named Template: updateEmployee Employee using Named Parameter
-	public Integer updateEmployeeWithNamedParaMete(final EmployeeEntity emp) {
+	public Integer updateEmployeeWithNamedParaMete(final EmployeeMO emp) {
 		logger.info("Repository Layer Invoked::EmployeeRepoImplement");
 		logger.info("Updating the Employee is processing method name::updateEmployeeWithNamedParaMete");
 		logger.info("Argument::" + emp);
@@ -218,7 +218,7 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 		
 	}
 	@Override
-	public Integer saveAddressDetails(AddressEntity address) {
+	public Integer saveAddressDetails(AddressMO address) {
 		logger.info("Repository Layer Invoked::EmployeeRepoImplement");
 		logger.info("Saving the Employee is processing method name::saveAddressDetails");
 		logger.info("Argument::" + address);
@@ -236,7 +236,7 @@ public class EmployeeRepoImplementation implements EmployeeRepo {
 	}
 
 	@Override
-	public Integer saveDepartmentDetails(DepartmentEntity departmentEntity) {
+	public Integer saveDepartmentDetails(DepartmentMO departmentEntity) {
 		logger.info("Repository Layer Invoked::EmployeeRepoImplement");
 		logger.info("Saving the Employee is processing method name::saveDepartmentDetails");
 		logger.info("Argument::" + departmentEntity);

@@ -3,22 +3,22 @@ package com.service;
 import java.util.List;
 
 import com.entity.Employee;
-import com.model.AddressEntity;
-import com.model.DepartmentEntity;
-import com.model.EmployeeEntity;
+import com.model.AddressMO;
+import com.model.DepartmentMO;
+import com.model.EmployeeMO;
 
 public interface EmployeeService {
-	public EmployeeEntity processGetEmployee(Integer id);
+	public EmployeeMO processGetEmployee(Integer id);
 
-	public List<Employee> processGetEmployees();
+	public List<EmployeeMO> processGetEmployees();
 
 	public String processDelete(Integer id);
 
-	public String processSave(EmployeeEntity emp);
+	public String processSave(EmployeeMO emp);
 
-	public String processUpdateEmployee(EmployeeEntity emp);
+	public String processUpdateEmployee(EmployeeMO emp);
 
-	public String processSaveUsingNamedParameter(EmployeeEntity employeeEntity);
+	public String processSaveUsingNamedParameter(EmployeeMO employeeEntity);
 
 	public String processDeleteUsingNamedParameter(Integer id);
 
@@ -26,11 +26,11 @@ public interface EmployeeService {
 
 	public List<Employee> processGetEmployeesUsingNamedQuery();
 
-	public String processUpdateEmployeeUsingNamedQuery(EmployeeEntity em);
+	public String processUpdateEmployeeUsingNamedQuery(EmployeeMO em);
 
-	public String processSaveAddressDetails(AddressEntity address);
+	public String processSaveAddressDetails(AddressMO address);
 
-	public String processSaveDepartmentDetails(DepartmentEntity departmentEntity);
+	public String processSaveDepartmentDetails(DepartmentMO departmentEntity);
 
-	public EmployeeEntity getEmployeeDetailsByID(Integer id);
+	public EmployeeMO getEmployeeDetailsByID(Integer id);
 }

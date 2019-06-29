@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.customException.MissingParameterInThePayLoad;
-import com.model.AddressEntity;
-import com.model.DepartmentEntity;
-import com.model.EmployeeEntity;
-import com.model.ErrorResponse;
-import com.model.SuccessResponse;
+import com.model.AddressMO;
+import com.model.DepartmentMO;
+import com.model.EmployeeMO;
+import com.model.ErrorResponseMO;
+import com.model.SuccessResponseMO;
 import com.service.EmployeeService;
 
 @Controller
@@ -43,7 +43,7 @@ public class ControllerClass {
 			logger.error(e.getMessage());
 		}
 		return new ResponseEntity<>(
-				new SuccessResponse(HttpStatus.NO_CONTENT.value(),
+				new SuccessResponseMO(HttpStatus.NO_CONTENT.value(),
 						HttpStatus.NO_CONTENT.toString()),
 				HttpStatus.NO_CONTENT);
 
@@ -62,21 +62,21 @@ public class ControllerClass {
 			logger.error(e.getMessage());
 		}
 		return new ResponseEntity<>(
-				new SuccessResponse(HttpStatus.NO_CONTENT.value(),
+				new SuccessResponseMO(HttpStatus.NO_CONTENT.value(),
 						HttpStatus.NO_CONTENT.toString()),
 				HttpStatus.NO_CONTENT);
 
 	}
 
 	@RequestMapping(value = "/saveEmpData", method = RequestMethod.POST)
-	public ResponseEntity<Object> saveEmpData(@RequestBody EmployeeEntity emp) {
+	public ResponseEntity<Object> saveEmpData(@RequestBody EmployeeMO emp) {
 		try {
 			logger.info("Saving the Employee Data Started");
 			logger.info("In the RestAPI::/saveEmpData");
 			logger.info("HTTP Method ::Post");
 			logger.info("Request Body ::{}" + emp);
 
-			return new ResponseEntity<>(new SuccessResponse(
+			return new ResponseEntity<>(new SuccessResponseMO(
 					HttpStatus.CREATED.value(), empService.processSave(emp)),
 					HttpStatus.CREATED);
 
@@ -88,14 +88,14 @@ public class ControllerClass {
 	}
 
 	@RequestMapping(value = "/updateEmpData", method = RequestMethod.PUT)
-	public ResponseEntity<Object> updateEmpData(@RequestBody EmployeeEntity emp) {
+	public ResponseEntity<Object> updateEmpData(@RequestBody EmployeeMO emp) {
 		try {
 			logger.info("Updating the Employee Data Started");
 			logger.info("In the RestAPI::/updateEmpData");
 			logger.info("HTTP Method Post");
 			logger.info("Request Body ::" + emp);
 
-			return new ResponseEntity<>(new SuccessResponse(
+			return new ResponseEntity<>(new SuccessResponseMO(
 					HttpStatus.OK.value(),
 					empService.processUpdateEmployee(emp)), HttpStatus.OK);
 
@@ -113,14 +113,14 @@ public class ControllerClass {
 			logger.info("RestAPI::/deleteEmployee");
 			logger.info("HTTP method :: DELETE");
 			logger.info("RequestBody ::{}" + id);
-			return new ResponseEntity<>(new SuccessResponse(
+			return new ResponseEntity<>(new SuccessResponseMO(
 					HttpStatus.OK.value(), empService.processDelete(id)),
 					HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
 		return new ResponseEntity<>(
-				new SuccessResponse(HttpStatus.NO_CONTENT.value(),
+				new SuccessResponseMO(HttpStatus.NO_CONTENT.value(),
 						HttpStatus.NO_CONTENT.toString()),
 				HttpStatus.NO_CONTENT);
 
@@ -128,14 +128,14 @@ public class ControllerClass {
 
 	@RequestMapping(value = "/saveEmpDataUsingNameQuery", method = RequestMethod.POST)
 	public ResponseEntity<Object> saveEmpDataUsingNameQuery(
-			@RequestBody EmployeeEntity emp) {
+			@RequestBody EmployeeMO emp) {
 		try {
 			logger.info("Saving the Employee Data Started");
 			logger.info("In the RestAPI::/saveEmpDataUsingNameQuery");
 			logger.info("HTTP Method Post");
 			logger.info("Request Body ::" + emp);
 
-			return new ResponseEntity<>(new SuccessResponse(
+			return new ResponseEntity<>(new SuccessResponseMO(
 					HttpStatus.CREATED.value(), empService.processSave(emp)),
 					HttpStatus.CREATED);
 		} catch (MissingParameterInThePayLoad exception) {
@@ -154,7 +154,7 @@ public class ControllerClass {
 			logger.info("HTTP method :: DELETE");
 			logger.info("RequestBody :: " + id);
 
-			return new ResponseEntity<>(new SuccessResponse(
+			return new ResponseEntity<>(new SuccessResponseMO(
 					HttpStatus.OK.value(),
 					empService.processDeleteUsingNamedParameter(id)),
 					HttpStatus.OK);
@@ -162,7 +162,7 @@ public class ControllerClass {
 			logger.error(e.getMessage());
 		}
 		return new ResponseEntity<>(
-				new SuccessResponse(HttpStatus.NO_CONTENT.value(),
+				new SuccessResponseMO(HttpStatus.NO_CONTENT.value(),
 						HttpStatus.NO_CONTENT.toString()),
 				HttpStatus.NO_CONTENT);
 
@@ -183,7 +183,7 @@ public class ControllerClass {
 			logger.error(e.getMessage());
 		}
 		return new ResponseEntity<>(
-				new SuccessResponse(HttpStatus.NO_CONTENT.value(),
+				new SuccessResponseMO(HttpStatus.NO_CONTENT.value(),
 						HttpStatus.NO_CONTENT.toString()),
 				HttpStatus.NO_CONTENT);
 
@@ -203,7 +203,7 @@ public class ControllerClass {
 			logger.error(e.getMessage());
 		}
 		return new ResponseEntity<>(
-				new SuccessResponse(HttpStatus.NO_CONTENT.value(),
+				new SuccessResponseMO(HttpStatus.NO_CONTENT.value(),
 						HttpStatus.NO_CONTENT.toString()),
 				HttpStatus.NO_CONTENT);
 
@@ -211,14 +211,14 @@ public class ControllerClass {
 
 	@RequestMapping(value = "/updateEmpDataUsingNamedQuery", method = RequestMethod.PUT)
 	public ResponseEntity<Object> updateEmpDataUsingNamedQuery(
-			@RequestBody EmployeeEntity emp) {
+			@RequestBody EmployeeMO emp) {
 		try {
 			logger.info("Updating the Employee Data Started");
 			logger.info("In the RestAPI::/updateEmpDataUsingNamedQuery");
 			logger.info("HTTP Method Post");
 			logger.info("Request Body ::" + emp);
 
-			return new ResponseEntity<>(new SuccessResponse(
+			return new ResponseEntity<>(new SuccessResponseMO(
 					HttpStatus.OK.value(),
 					empService.processUpdateEmployeeUsingNamedQuery(emp)),
 					HttpStatus.OK);
@@ -232,27 +232,27 @@ public class ControllerClass {
 
 	@RequestMapping(value = "/saveAddressDetails", method = RequestMethod.POST)
 	public ResponseEntity<Object> saveAddressDetails(
-			@RequestBody AddressEntity address) {
+			@RequestBody AddressMO address) {
 		try {
 			logger.info("Invoking saveAddressDetails started");
 			logger.info("Method::saveAddressDetails");
 			logger.info("HTTP Method::POST");
 			logger.info("URL::/saveAddressDetails");
 			logger.info("Arguments::" + address);
-			return new ResponseEntity<Object>(new SuccessResponse(
+			return new ResponseEntity<Object>(new SuccessResponseMO(
 					HttpStatus.CREATED.value(),
 					empService.processSaveAddressDetails(address)),
 					HttpStatus.CREATED);
 
 		} catch (MissingParameterInThePayLoad missingParameterInThePayLoad) {
 			logger.error(missingParameterInThePayLoad);
-			return new ResponseEntity<>(new ErrorResponse(
+			return new ResponseEntity<>(new ErrorResponseMO(
 					HttpStatus.INTERNAL_SERVER_ERROR.value(),
 					HttpStatus.INTERNAL_SERVER_ERROR.toString()),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (RuntimeException exception) {
 			logger.error(exception);
-			return new ResponseEntity<>(new ErrorResponse(
+			return new ResponseEntity<>(new ErrorResponseMO(
 					HttpStatus.INTERNAL_SERVER_ERROR.value(),
 					HttpStatus.INTERNAL_SERVER_ERROR.toString()),
 					HttpStatus.INTERNAL_SERVER_ERROR);
@@ -262,27 +262,27 @@ public class ControllerClass {
 
 	@RequestMapping(value = "/saveDepartmentDetails", method = RequestMethod.POST)
 	public ResponseEntity<Object> saveDepartmentDetails(
-			@RequestBody DepartmentEntity departmentEntity) {
+			@RequestBody DepartmentMO departmentEntity) {
 		try {
 			logger.info("Invoking saveDepartmentDetails started");
 			logger.info("Method::saveDepartmentDetails");
 			logger.info("HTTP Method::POST");
 			logger.info("URL::/saveDepartmentDetails");
 			logger.info("Arguments::" + departmentEntity);
-			return new ResponseEntity<Object>(new SuccessResponse(
+			return new ResponseEntity<Object>(new SuccessResponseMO(
 					HttpStatus.CREATED.value(),
 					empService.processSaveDepartmentDetails(departmentEntity)),
 					HttpStatus.CREATED);
 
 		} catch (MissingParameterInThePayLoad missingParameterInThePayLoad) {
 			logger.error(missingParameterInThePayLoad);
-			return new ResponseEntity<>(new ErrorResponse(
+			return new ResponseEntity<>(new ErrorResponseMO(
 					HttpStatus.INTERNAL_SERVER_ERROR.value(),
 					HttpStatus.INTERNAL_SERVER_ERROR.toString()),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (RuntimeException exception) {
 			logger.error(exception);
-			return new ResponseEntity<>(new ErrorResponse(
+			return new ResponseEntity<>(new ErrorResponseMO(
 					HttpStatus.INTERNAL_SERVER_ERROR.value(),
 					HttpStatus.INTERNAL_SERVER_ERROR.toString()),
 					HttpStatus.INTERNAL_SERVER_ERROR);
@@ -304,13 +304,13 @@ public class ControllerClass {
 
 		} catch (MissingParameterInThePayLoad missingParameterInThePayLoad) {
 			logger.error(missingParameterInThePayLoad);
-			return new ResponseEntity<>(new ErrorResponse(
+			return new ResponseEntity<>(new ErrorResponseMO(
 					HttpStatus.INTERNAL_SERVER_ERROR.value(),
 					HttpStatus.INTERNAL_SERVER_ERROR.toString()),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (RuntimeException exception) {
 			logger.error(exception);
-			return new ResponseEntity<>(new ErrorResponse(
+			return new ResponseEntity<>(new ErrorResponseMO(
 					HttpStatus.INTERNAL_SERVER_ERROR.value(),
 					HttpStatus.INTERNAL_SERVER_ERROR.toString()),
 					HttpStatus.INTERNAL_SERVER_ERROR);

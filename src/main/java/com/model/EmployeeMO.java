@@ -1,9 +1,9 @@
 package com.model;
 
-import javax.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
-
-public class EmployeeEntity {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class EmployeeMO {
 
 	private Integer id;
 	private Integer age;
@@ -13,14 +13,14 @@ public class EmployeeEntity {
 	private String bloodGroup;
 	private String departmentName;
 	private String employeeType;
-	private AddressEntity addressDetails;
-	private DepartmentEntity departmentDetails;
+	private AddressMO addressDetails;
+	private DepartmentMO departmentDetails;
 
-	public EmployeeEntity() {
+	public EmployeeMO() {
 	}
 	
 
-	public EmployeeEntity(Integer id, Integer age, String firstName, String lastName, String address, String bloodGroup,
+	public EmployeeMO(Integer id, Integer age, String firstName, String lastName, String address, String bloodGroup,
 			String departmentName, String employeeType) {
 		super();
 		this.id = id;
@@ -99,22 +99,22 @@ public class EmployeeEntity {
 	}
 
 
-	public AddressEntity getAddressDetails() {
+	public AddressMO getAddressDetails() {
 		return addressDetails;
 	}
 
 
-	public void setAddressDetails(AddressEntity addressDetails) {
+	public void setAddressDetails(AddressMO addressDetails) {
 		this.addressDetails = addressDetails;
 	}
 
 
-	public DepartmentEntity getDepartmentDetails() {
+	public DepartmentMO getDepartmentDetails() {
 		return departmentDetails;
 	}
 
 
-	public void setDepartmentDetails(DepartmentEntity departmentDetails) {
+	public void setDepartmentDetails(DepartmentMO departmentDetails) {
 		this.departmentDetails = departmentDetails;
 	}
 
