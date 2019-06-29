@@ -33,4 +33,6 @@ public interface EmployeeService {
 	public String processSaveDepartmentDetails(DepartmentMO departmentEntity);
 
 	public EmployeeMO getEmployeeDetailsByID(Integer id);
+	
+	public EmployeeMO processUpdateEmployeeForHibernate(EmployeeMO emp);
 }

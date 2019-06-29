@@ -13,10 +13,10 @@ import com.model.AddressMO;
 import com.model.CustomErrorMO;
 import com.model.DepartmentMO;
 import com.model.EmployeeMO;
+import com.model.ErrorResponseMO;
 
 @Service("hibernateService")
-public class EmployeeServiceForHibarnateOperation extends AbstractDAO implements
-		EmployeeService {
+public class EmployeeServiceForHibarnateOperation extends AbstractDAO implements EmployeeService {
 
 	@Autowired
 	private EmployeeRepoForHibernate employeeRepoForHibernate;
@@ -24,19 +24,14 @@ public class EmployeeServiceForHibarnateOperation extends AbstractDAO implements
 	public EmployeeMO processGetEmployee(Integer id) {
 
 		if (EmployeeServiceImplementation.payLoadValidationForID(id).size() != 0)
-			throw new MissingParameterInThePayLoad(new CustomErrorMO(
-					EmployeeServiceImplementation.payLoadValidationForID(id)));
-		return EmployeeServiceImplementation
-				.convertEmployee(employeeRepoForHibernate.getEmployee(id));
+			throw new MissingParameterInThePayLoad(
+					new CustomErrorMO(EmployeeServiceImplementation.payLoadValidationForID(id)));
+		return EmployeeServiceImplementation.convertEmployee(employeeRepoForHibernate.getEmployee(id));
 	}
 
-	//vijeta--->create save ,test,validation ouput put in txt
-	
-	//update--->create update,Convertion ,test,validation ouput put in txt
-	
+
 	public List<EmployeeMO> processGetEmployees() {
-		employeeRepoForHibernate.getEmployees();
-		return null ;
+		return EmployeeServiceImplementation.convertIntoEmployees(employeeRepoForHibernate.getEmployees());
 	}
 
 	public String processDelete(Integer id) {
@@ -49,9 +44,12 @@ public class EmployeeServiceForHibarnateOperation extends AbstractDAO implements
 		return null;
 	}
 
-	public String processUpdateEmployee(EmployeeMO emp) {
+	public EmployeeMO processUpdateEmployeeForHibernate(EmployeeMO emp) {
 
-		return null;
+		List<ErrorResponseMO> errlist = EmployeeServiceImplementation.payLoadValidation(emp);
+		if (errlist.size() != 0)
+			throw new MissingParameterInThePayLoad(new CustomErrorMO(errlist));
+		return EmployeeServiceImplementation.convertEmployee(employeeRepoForHibernate.updateEmployeeForHibernate(emp));
 	}
 
 	// non used
@@ -94,6 +92,12 @@ public class EmployeeServiceForHibarnateOperation extends AbstractDAO implements
 
 	@Override
 	public EmployeeMO getEmployeeDetailsByID(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String processUpdateEmployee(EmployeeMO emp) {
 		// TODO Auto-generated method stub
 		return null;
 	}
