@@ -1,8 +1,8 @@
 package com.model;
 
-import javax.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class EmployeeEntity {
 
 	private Integer id;

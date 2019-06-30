@@ -140,7 +140,7 @@ public class ControllerForHibernateOperation {
 
 		}
 	}
-	@RequestMapping(value = "/updateEmployeesData" , method = RequestMethod.DELETE)
+	@RequestMapping(value = "/deleteEmployeesData" , method = RequestMethod.DELETE)
 	public ResponseEntity<Object> deleteEmployeeData(@RequestParam("id") Integer id) {
 		try {
 			logger.info("Invoking of deleteEmployeeData started");
@@ -165,7 +165,6 @@ public class ControllerForHibernateOperation {
 					HttpStatus.NO_CONTENT.value(),
 					HttpStatus.NO_CONTENT.toString()),
 					HttpStatus.NO_CONTENT);
-
 		}
 	}
 	

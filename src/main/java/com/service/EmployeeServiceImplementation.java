@@ -189,8 +189,13 @@ public class EmployeeServiceImplementation implements EmployeeService {
 	public EmployeeEntity convertEmployee(Employee employee) {
 		EmployeeEntity employeeEntity = new EmployeeEntity();
 		employeeEntity.setId(employee.getId());
+		employeeEntity.setFirstName(employee.getFirstName());
+		employeeEntity.setLastName(employee.getLastName());
 		employeeEntity.setAge(employee.getAge());
-
+		employeeEntity.setBloodGroup(employee.getBloodGroup());
+		employeeEntity.setDepartmentName(employee.getDepartmentName());
+		employeeEntity.setEmployeeType(employee.getEmployeeType());
+		employeeEntity.setAddress(employee.getAddress());
 		return employeeEntity;
 	}
 
@@ -257,7 +262,6 @@ public class EmployeeServiceImplementation implements EmployeeService {
 		}
 		if (address != null) {
 			addressEntity = new AddressEntity();
-			addressEntity.setEmployeeId(address.getEmployeeId());
 			addressEntity.setAddressId(address.getAddressId());
 			addressEntity.setFullAddress(address.getFullAddress());
 			addressEntity.setCity(address.getCity());
@@ -267,7 +271,6 @@ public class EmployeeServiceImplementation implements EmployeeService {
 			departmentEntity = new DepartmentEntity();
 			departmentEntity.setDepartmentId(department.getDepartmentId());
 			departmentEntity.setDepartmentName(department.getDepartmentName());
-			departmentEntity.setEmployeeId(department.getEmployeeId());
 			departmentEntity.setNumberOfEmployees(department.getNumberOfEmployees());
 			employeeEntity.setAddressDetails(addressEntity);
 			employeeEntity.setDepartmentDetails(departmentEntity);
