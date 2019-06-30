@@ -1,24 +1,24 @@
 package com.customException;
 
-import com.model.CustomErrorEntity;
+import com.model.CustomErrorMO;
 
 public class MissingParameterInThePayLoad extends RuntimeException {
-	private CustomErrorEntity customErrorEntity;
+	private CustomErrorMO customErrorEntity;
 
 	public MissingParameterInThePayLoad() {
 		super();
 	}
 
-	public MissingParameterInThePayLoad(CustomErrorEntity customErrorEntity) {
+	public MissingParameterInThePayLoad(CustomErrorMO customErrorEntity) {
 		super();
 		this.customErrorEntity = customErrorEntity;
 	}
 
-	public CustomErrorEntity getCustomErrorEntity() {
+	public CustomErrorMO getCustomErrorEntity() {
 		return customErrorEntity;
 	}
 
-	public void setCustomErrorEntity(CustomErrorEntity customErrorEntity) {
+	public void setCustomErrorEntity(CustomErrorMO customErrorEntity) {
 		this.customErrorEntity = customErrorEntity;
 	}
 

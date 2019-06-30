@@ -1,11 +1,11 @@
 package com.model;
 
-public class SuccessResponse {
+public class SuccessResponseMO {
 
 	private int successCode;
 	private String successMessage;
 
-	public SuccessResponse(int successCode, String successMessage) {
+	public SuccessResponseMO(int successCode, String successMessage) {
 		super();
 		this.successCode = successCode;
 		this.successMessage = successMessage;

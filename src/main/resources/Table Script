@@ -45,7 +45,16 @@ CREATE TABLE Department(
 )ENGINE=InnoDB;
 
 
-Insert into Employee (employeeId,age,firstName,lastName,address,bloodGroup,departmentName,employeeType) 
+ Emp_id integer not null auto_increment,
+         varchar(255),
+         integer,
+         varchar(255),
+         varchar(255),
+         varchar(255),
+         varchar(255),
+        Emp_lastName varchar(255)
+
+Insert into Employee (Emp_Id,Emp_age,Emp_firstName,Emp_lastName,Emp_address,Emp_bloodGroup,Emp_departmentName,Emp_employeeType) 
 values (1002,22,"Vijeta","Bopche","Noida","O","Medical","P");
 
 Insert into Address(employeeId,addressID,fullAddress,city,pincode)

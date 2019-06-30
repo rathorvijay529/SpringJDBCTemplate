@@ -116,7 +116,7 @@ public class config {
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(dataSourceforHibernate());
-		sessionFactory.setPackagesToScan(new String[] { "com.model" });
+		sessionFactory.setPackagesToScan(new String[] { "com.entity" });
 		sessionFactory.setHibernateProperties(hibernateProperties());
 		return sessionFactory;
 	}

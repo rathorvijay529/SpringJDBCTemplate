@@ -10,7 +10,7 @@ public class AbstractDAO {
 	private SessionFactory sessionFactory;
 
 	protected Session getSession() {
-		return sessionFactory.getCurrentSession();
+		return sessionFactory.openSession();
 	}
 
 	public void save(Object entity) {

@@ -2,90 +2,75 @@ package com.dao;
 
 import java.util.List;
 
-import com.entity.Address;
-import com.entity.Department;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
 import com.entity.Employee;
-import com.model.AddressEntity;
-import com.model.DepartmentEntity;
-import com.model.EmployeeEntity;
+import com.model.EmployeeMO;
 
+@Repository("hibernateRepo")
+@SuppressWarnings("unchecked")
 public class EmployeeRepoImplForHibernate extends AbstractDAO implements
-		EmployeeRepo {
+		EmployeeRepoForHibernate {
 
-	public Employee getEmployee(Integer id) {
+	// getSession().createCriteria(Employee.class).add(Restrictions.eq("id",
+	// id)) ==>>select * from employee where id=5;
 
-		return null;
+	// getSession().createCriteria(Employee.class).list() ===>>> select * from
+	// employee
+
+	// getSession().createCriteria(Employee.class).setProjection("id").add(Restrictions.eq("id",
+	// id)) ===>>>select id from employee where id=5;
+
+	// getSession().createCriteria(Employee.class)addOrder(Order.desc("id")).list()
+	// ==>> select * from employee odre by id desc
+
+	// query===>>fetch
+	// creteria==>>fetch
+
+	
+	
+	//creteria query
+	@Override
+	public Employee updateEmployeeForHibernate(EmployeeMO emp) {
+		getSession().saveOrUpdate(emp);
+		return getEmployee(emp.getId());
 	}
 
+	@Override
 	public List<Employee> getEmployees() {
-
-		return null;
+		Criteria criteria = getSession().createCriteria(Employee.class);
+		criteria = criteria.addOrder(Order.desc("id"));
+		List<Employee> employeeList = criteria.list();
+		return employeeList;
 	}
 
+	@Override
 	public Integer delete(Integer id) {
-
-		return null;
-	}
-
-	public Integer save(EmployeeEntity emp) {
-
-		return null;
-	}
-
-	public Integer updateEmployee(EmployeeEntity emp) {
-
-		return null;
-	}
-
-	public Employee getEmployeeWithNamedParaMeter(Integer id) {
-
-		return null;
-	}
-
-	public Integer saveEmployeeUsingNamedParaMeter(EmployeeEntity emp) {
-
-		return null;
-	}
-
-	public Integer deleteUsingNamedParameterQuery(Integer id) {
-
-		return null;
-	}
-
-
-	public List<Employee> getEmployeesWithNamedParaMete() {
-
+		getSession().delete(getEmployee(id));
 		return null;
 	}
 
 	@Override
-	public Integer updateEmployeeWithNamedParaMete(EmployeeEntity emp) {
-
-		return null;
+	public Employee save(Employee emp) {
+		getSession().save(emp);
+		return getEmployee(emp.getId());
 	}
 
 	@Override
-	public Integer saveAddressDetails(AddressEntity address) {
-		// TODO Auto-generated method stub
-		return null;
+	public Employee getEmployee(Integer id) {
+		return (Employee) getSession().createCriteria(Employee.class)
+				.add(Restrictions.eq("id", id)).list().get(0);
+
 	}
 
-	@Override
-	public Integer saveDepartmentDetails(DepartmentEntity departmentEntity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Address getAddressWithNamedParaMeter(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Department getDepartmentWithNamedParaMeter(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	//hql query-- getAllEmployess,save--vijeta
+	//sql query-- getAllEmployess,save--vijeta
+	//(all anotation with proper explanation)
+	//hql query-- getEmployee,update,delete--rizwan
+	//sql query-- getEmployee,update,delete--rizwan
+	//(all anotation with proper explanation)
+	
+	
 }
