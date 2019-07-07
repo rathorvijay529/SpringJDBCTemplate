@@ -34,7 +34,7 @@ This is project is all about to learn spring concepts only.we are using JDBCTemp
 •    git commit (committing all the files)
 •    git push origin master (pushing master branch)
 •    git branch -a (checking all available branch,* will show current branch)
-•    git  branch -b develop (creating develop branch)
+•    git  checkout -b develop (creating develop branch)
 •    git push origin develop (pushing develop branch.
 
  ```
