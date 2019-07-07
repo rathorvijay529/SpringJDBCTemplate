@@ -3,7 +3,6 @@ package com.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -26,118 +25,94 @@ import com.properties.ErrorCodeMessages;
  */
 @Service("employeeServiceForJdbc")
 public class EmployeeServiceImplementation implements EmployeeService {
-	private static final Logger logger = Logger.getLogger(EmployeeServiceImplementation.class);
 	@Autowired
 	@Qualifier("employeeRepoForJDBC")
 	private EmployeeRepo empRepo;
 
 	public EmployeeMO processGetEmployee(Integer id) {
-		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
-		logger.info("Retriving the Employee is processing method name::processGetEmployee");
-		logger.info("Argument::" + "id");
 		if (payLoadValidationForID(id).size() != 0)
-			throw new MissingParameterInThePayLoad(new CustomErrorMO(payLoadValidationForID(id)));
+			throw new MissingParameterInThePayLoad(new CustomErrorMO(
+					payLoadValidationForID(id)));
 		return convertEmployeeEntityToModel(empRepo.getEmployee(id));
 	}
 
 	public Employee processGetEmployeeUsingNamedQuery(Integer id) {
-		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
-		logger.info("Retriving the Employee is processing method name::processGetEmployeeUsingNamedQuery");
-		logger.info("Argument::" + "id");
 		if (payLoadValidationForID(id).size() != 0)
-			throw new MissingParameterInThePayLoad(new CustomErrorMO(payLoadValidationForID(id)));
+			throw new MissingParameterInThePayLoad(new CustomErrorMO(
+					payLoadValidationForID(id)));
 		return empRepo.getEmployeeWithNamedParaMeter(id);
 	}
 
-
 	public List<EmployeeMO> processGetEmployees() {
-		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
-		logger.info("Retriving the Employee is processing method name::processGetEmployees");
-		logger.info("Argument::" + "");
 		return convertIntoEmployees(empRepo.getEmployees());
 	}
 
-	
-
 	public String processDelete(Integer id) {
-		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
-		logger.info("Deleting the Employee is processing, method name::processDelete");
-		logger.info("Argument::" + "id");
 		if (payLoadValidationForID(id).size() != 0)
-			throw new MissingParameterInThePayLoad(new CustomErrorMO(payLoadValidationForID(id)));
-		logger.info("Delete is completed");
-		return (empRepo.delete(id) == 1) ? "Data Successfully deleted" : "Data does not deleted";
+			throw new MissingParameterInThePayLoad(new CustomErrorMO(
+					payLoadValidationForID(id)));
+		return (empRepo.delete(id) == 1) ? "Data Successfully deleted"
+				: "Data does not deleted";
 
 	}
 
 	public String processSave(EmployeeMO employeeEntity) {
-		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
-		logger.info("Saving the Employee is processing method name::processSave");
-		logger.info("Argument::" + employeeEntity);
+
 		List<ErrorResponseMO> errlist = payLoadValidation(employeeEntity, false);
 		if (errlist.size() != 0)
 			throw new MissingParameterInThePayLoad(new CustomErrorMO(errlist));
-		logger.info("Saving Layer Invoking is completed");
-		return empRepo.save(employeeEntity) == 1 ? "Data saved successfully" : "Data does not saved successfully";
+
+		return empRepo.save(employeeEntity) == 1 ? "Data saved successfully"
+				: "Data does not saved successfully";
 	}
 
 	public String processSaveUsingNamedParameter(EmployeeMO employeeEntity) {
-		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
-		logger.info("Saving the Employee is processing method name::processSaveUsingNamedParameter");
-		logger.info("Argument::" + employeeEntity);
+
 		List<ErrorResponseMO> errlist = payLoadValidation(employeeEntity, false);
 		if (errlist.size() != 0)
 
 			throw new MissingParameterInThePayLoad(new CustomErrorMO(errlist));
 
-		logger.info("Saving Layer Invoking is completed");
 		return empRepo.saveEmployeeUsingNamedParaMeter(employeeEntity) == 1 ? "Data saved successfully"
 				: "Data does not saved successfully";
 
 	}
 
 	public String processDeleteUsingNamedParameter(Integer id) {
-		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
-		logger.info("Deleting the Employee is processing, method name::processDeleteUsingNamedParameter");
-		logger.info("Argument::" + "id");
+
 		if (payLoadValidationForID(id).size() != 0)
-			throw new MissingParameterInThePayLoad(new CustomErrorMO(payLoadValidationForID(id)));
-		logger.info("Delete is completed");
+			throw new MissingParameterInThePayLoad(new CustomErrorMO(
+					payLoadValidationForID(id)));
+
 		return (empRepo.deleteUsingNamedParameterQuery(id) == 1) ? "Data Successfully deleted"
 				: "Data does not deleted";
 
 	}
 
 	public String processUpdateEmployee(EmployeeMO employeeEntity) {
-		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
-		logger.info("Updating the Employee is processing method name::processUpdateEmployee");
-		logger.info("Argument::" + employeeEntity);
+
 		List<ErrorResponseMO> errlist = payLoadValidation(employeeEntity, false);
 		if (errlist.size() == 0)
 			empRepo.updateEmployee(employeeEntity);
 		else
 			throw new MissingParameterInThePayLoad(new CustomErrorMO(errlist));
-		logger.info("Updating Layer Invoking is completed");
-		return (empRepo.updateEmployee(employeeEntity) == 1) ? "Data  Updated Successfully" : "Data does not Updated";
+		return (empRepo.updateEmployee(employeeEntity) == 1) ? "Data  Updated Successfully"
+				: "Data does not Updated";
 	}
 
 	public List<Employee> processGetEmployeesUsingNamedQuery() {
-		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
-		logger.info("Retriving the Employee is processing method name::processGetEmployeesUsingNamedQuery");
-		logger.info("Argument::" + "");
+
 		return empRepo.getEmployeesWithNamedParaMete();
 	}
 
 	public String processUpdateEmployeeUsingNamedQuery(EmployeeMO employeeEntity) {
-		logger.info("Service Layer Invoked::EmployeeServiceImplementation");
-		logger.info("Updating the Employee is processing method name::processUpdateEmployeeUsingNamedQuery");
-		logger.info("Argument::" + employeeEntity);
+
 		List<ErrorResponseMO> errlist = payLoadValidation(employeeEntity, false);
 		if (errlist.size() == 0)
 			empRepo.updateEmployeeWithNamedParaMete(employeeEntity);
 		else
 			throw new MissingParameterInThePayLoad(new CustomErrorMO(errlist));
-		logger.info("Updating Layer Invoking is completed");
+
 		return (empRepo.updateEmployeeWithNamedParaMete(employeeEntity) == 1) ? "Data  Updated Successfully"
 				: "Data does not Update";
 	}
@@ -145,20 +120,20 @@ public class EmployeeServiceImplementation implements EmployeeService {
 	public static List<ErrorResponseMO> payLoadValidationForID(Integer id) {
 		List<ErrorResponseMO> errorList = new ArrayList<ErrorResponseMO>();
 		if (null == id)
-			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_EMPID.getCode(),
-					ErrorCodeMessages.MISSING_EMPID.getDescription()));
+			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_EMPID
+					.getCode(), ErrorCodeMessages.MISSING_EMPID
+					.getDescription()));
 
 		return errorList;
 	}
 
 	@Override
 	public String processSaveAddressDetails(AddressMO address) {
-		logger.info("Service Layer Invoked::EmployeeService");
-		logger.info("Saving the Employee is processing method name::processSaveAddressDetails");
-		logger.info("Argument::" + address);
+
 		if (payLoadValidationforAddress(address).size() != 0)
-			throw new MissingParameterInThePayLoad(new CustomErrorMO(payLoadValidationforAddress(address)));
-		logger.info("Saving Layer Invoking is completed");
+			throw new MissingParameterInThePayLoad(new CustomErrorMO(
+					payLoadValidationforAddress(address)));
+
 		return empRepo.saveAddressDetails(address) == 1 ? "Data saved successfully"
 				: "Data does not saved successfully";
 
@@ -166,24 +141,23 @@ public class EmployeeServiceImplementation implements EmployeeService {
 
 	@Override
 	public String processSaveDepartmentDetails(DepartmentMO departmentEntity) {
-		logger.info("Service Layer Invoked::EmployeeService");
-		logger.info("Saving the Employee is processing method name::processSaveDepartmentDetails");
-		logger.info("Argument::" + departmentEntity);
+
 		if (payLoadValidationforDepartment(departmentEntity).size() != 0)
-			throw new MissingParameterInThePayLoad(new CustomErrorMO(payLoadValidationforDepartment(departmentEntity)));
-		logger.info("Saving Layer Invoking is completed");
+			throw new MissingParameterInThePayLoad(new CustomErrorMO(
+					payLoadValidationforDepartment(departmentEntity)));
+
 		return empRepo.saveDepartmentDetails(departmentEntity) == 1 ? "Data saved successfully"
 				: "Data does not saved successfully";
 	}
 
 	@Override
 	public EmployeeMO getEmployeeDetailsByID(Integer id) {
-		logger.info("Service Layer Invoked::EmployeeService");
-		logger.info("Retriving the Employee is processing method name::getEmployee");
-		logger.info("Argument::" + id);
+
 		if (payLoadValidationForID(id).size() != 0)
-			throw new MissingParameterInThePayLoad(new CustomErrorMO(payLoadValidationForID(id)));
-		return convertIntoEmployeeDetails(empRepo.getEmployee(id), empRepo.getAddressWithNamedParaMeter(id),
+			throw new MissingParameterInThePayLoad(new CustomErrorMO(
+					payLoadValidationForID(id)));
+		return convertIntoEmployeeDetails(empRepo.getEmployee(id),
+				empRepo.getAddressWithNamedParaMeter(id),
 				empRepo.getDepartmentWithNamedParaMeter(id));
 
 	}
@@ -200,10 +174,9 @@ public class EmployeeServiceImplementation implements EmployeeService {
 		employeeMo.setAddress(employee.getAddress());
 		return employeeMo;
 	}
-	
+
 	public static Employee convertEmployeeModelToEntity(EmployeeMO employeeMO) {
 		Employee employee = new Employee();
-		//employee.setId(employeeMO.getId());
 		employee.setFirstName(employeeMO.getFirstName());
 		employee.setLastName(employeeMO.getLastName());
 		employee.setAge(employeeMO.getAge());
@@ -214,52 +187,66 @@ public class EmployeeServiceImplementation implements EmployeeService {
 		return employee;
 	}
 
-	public static List<ErrorResponseMO> payLoadValidationforAddress(AddressMO addressEntity) {
+	public static List<ErrorResponseMO> payLoadValidationforAddress(
+			AddressMO addressEntity) {
 		List<ErrorResponseMO> errorList = new ArrayList<ErrorResponseMO>();
 		if (null == addressEntity.getEmployeeId())
-			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_EMPID.getCode(),
-					ErrorCodeMessages.MISSING_EMPID.getDescription()));
+			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_EMPID
+					.getCode(), ErrorCodeMessages.MISSING_EMPID
+					.getDescription()));
 
 		if (null == addressEntity.getAddressId())
-			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_ADDRESSID.getCode(),
+			errorList.add(new ErrorResponseMO(
+					ErrorCodeMessages.MISSING_ADDRESSID.getCode(),
 					ErrorCodeMessages.MISSING_ADDRESSID.getDescription()));
 
 		if (null == addressEntity.getCity())
-			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_CITY.getCode(),
-					ErrorCodeMessages.MISSING_CITY.getDescription()));
+			errorList
+					.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_CITY
+							.getCode(), ErrorCodeMessages.MISSING_CITY
+							.getDescription()));
 
 		if (null == addressEntity.getFullAddress())
-			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_FULLADDRESS.getCode(),
+			errorList.add(new ErrorResponseMO(
+					ErrorCodeMessages.MISSING_FULLADDRESS.getCode(),
 					ErrorCodeMessages.MISSING_FULLADDRESS.getDescription()));
 
 		if (null == addressEntity.getPincode())
-			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_PINCODE.getCode(),
-					ErrorCodeMessages.MISSING_PINCODE.getDescription()));
+			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_PINCODE
+					.getCode(), ErrorCodeMessages.MISSING_PINCODE
+					.getDescription()));
 		return errorList;
 	}
 
-	public static List<ErrorResponseMO> payLoadValidationforDepartment(DepartmentMO departmentEntity) {
+	public static List<ErrorResponseMO> payLoadValidationforDepartment(
+			DepartmentMO departmentEntity) {
 		List<ErrorResponseMO> errorList = new ArrayList<ErrorResponseMO>();
 		if (null == departmentEntity.getEmployeeId())
-			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_EMPID.getCode(),
-					ErrorCodeMessages.MISSING_EMPID.getDescription()));
+			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_EMPID
+					.getCode(), ErrorCodeMessages.MISSING_EMPID
+					.getDescription()));
 
 		if (null == departmentEntity.getDepartmentId())
-			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_DEPARTMENTID.getCode(),
+			errorList.add(new ErrorResponseMO(
+					ErrorCodeMessages.MISSING_DEPARTMENTID.getCode(),
 					ErrorCodeMessages.MISSING_DEPARTMENTID.getDescription()));
 
 		if (null == departmentEntity.getDepartmentName())
-			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_DEPARTMENTNAME.getCode(),
+			errorList.add(new ErrorResponseMO(
+					ErrorCodeMessages.MISSING_DEPARTMENTNAME.getCode(),
 					ErrorCodeMessages.MISSING_DEPARTMENTNAME.getDescription()));
 
 		if (null == departmentEntity.getNumberOfEmployees())
-			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_NUMBEROFEMPLOYEES.getCode(),
-					ErrorCodeMessages.MISSING_NUMBEROFEMPLOYEES.getDescription()));
+			errorList.add(new ErrorResponseMO(
+					ErrorCodeMessages.MISSING_NUMBEROFEMPLOYEES.getCode(),
+					ErrorCodeMessages.MISSING_NUMBEROFEMPLOYEES
+							.getDescription()));
 
 		return errorList;
 	}
 
-	public static EmployeeMO convertIntoEmployeeDetails(Employee employee, Address address, Department department) {
+	public static EmployeeMO convertIntoEmployeeDetails(Employee employee,
+			Address address, Department department) {
 		EmployeeMO employeeEntity = null;
 		AddressMO addressEntity = null;
 		DepartmentMO departmentEntity = null;
@@ -286,7 +273,8 @@ public class EmployeeServiceImplementation implements EmployeeService {
 			departmentEntity = new DepartmentMO();
 			departmentEntity.setDepartmentId(department.getDepartmentId());
 			departmentEntity.setDepartmentName(department.getDepartmentName());
-			departmentEntity.setNumberOfEmployees(department.getNumberOfEmployees());
+			departmentEntity.setNumberOfEmployees(department
+					.getNumberOfEmployees());
 			employeeEntity.setAddressDetails(addressEntity);
 			employeeEntity.setDepartmentDetails(departmentEntity);
 		}
@@ -298,43 +286,52 @@ public class EmployeeServiceImplementation implements EmployeeService {
 			EmployeeMO employeeEntity, boolean hibernateFlag) {
 
 		List<ErrorResponseMO> errorList = new ArrayList<ErrorResponseMO>();
-		
-		if (null == employeeEntity.getId()&&!hibernateFlag)
+
+		if (null == employeeEntity.getId() && !hibernateFlag)
 			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_EMPID
 					.getCode(), ErrorCodeMessages.MISSING_EMPID
 					.getDescription()));
 		if (null == employeeEntity.getAge())
-			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_AGE.getCode(),
-					ErrorCodeMessages.MISSING_AGE.getDescription()));
+			errorList
+					.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_AGE
+							.getCode(), ErrorCodeMessages.MISSING_AGE
+							.getDescription()));
 
 		if (null == employeeEntity.getAddress())
-			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_ADDRESS.getCode(),
-					ErrorCodeMessages.MISSING_ADDRESS.getDescription()));
+			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_ADDRESS
+					.getCode(), ErrorCodeMessages.MISSING_ADDRESS
+					.getDescription()));
 
 		if (null == employeeEntity.getBloodGroup())
-			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_BLOODGROUP.getCode(),
+			errorList.add(new ErrorResponseMO(
+					ErrorCodeMessages.MISSING_BLOODGROUP.getCode(),
 					ErrorCodeMessages.MISSING_BLOODGROUP.getDescription()));
 
 		if (null == employeeEntity.getDepartmentName())
-			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_DEPARTMENTNAME.getCode(),
+			errorList.add(new ErrorResponseMO(
+					ErrorCodeMessages.MISSING_DEPARTMENTNAME.getCode(),
 					ErrorCodeMessages.MISSING_DEPARTMENTNAME.getDescription()));
 
 		if (null == employeeEntity.getEmployeeType())
-			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_EMPLOYEETYPE.getCode(),
+			errorList.add(new ErrorResponseMO(
+					ErrorCodeMessages.MISSING_EMPLOYEETYPE.getCode(),
 					ErrorCodeMessages.MISSING_EMPLOYEETYPE.getDescription()));
 
 		if (null == employeeEntity.getFirstName())
-			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_FIRSTNAME.getCode(),
+			errorList.add(new ErrorResponseMO(
+					ErrorCodeMessages.MISSING_FIRSTNAME.getCode(),
 					ErrorCodeMessages.MISSING_FIRSTNAME.getDescription()));
 
 		if (null == employeeEntity.getLastName())
-			errorList.add(new ErrorResponseMO(ErrorCodeMessages.MISSING_LASTNAME.getCode(),
+			errorList.add(new ErrorResponseMO(
+					ErrorCodeMessages.MISSING_LASTNAME.getCode(),
 					ErrorCodeMessages.MISSING_LASTNAME.getDescription()));
 
 		return errorList;
 	}
-	
-	public static List<EmployeeMO> convertIntoEmployees(List<Employee> employeeList) {
+
+	public static List<EmployeeMO> convertIntoEmployees(
+			List<Employee> employeeList) {
 		List<EmployeeMO> employeeMO = null;
 		if (employeeList != null) {
 			employeeMO = new ArrayList<>();

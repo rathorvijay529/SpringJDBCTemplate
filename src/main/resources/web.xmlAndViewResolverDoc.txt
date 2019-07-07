@@ -39,9 +39,7 @@ web.xml
 
 mvc-dispatcher-servlet.xml
 =============================
-<bean id="viewResolver"
-      class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
     <property name="prefix" value="/WEB-INF/jsp/"/>
     <property name="suffix" value=".jsp"/>
 </bean>

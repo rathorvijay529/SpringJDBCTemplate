@@ -54,7 +54,7 @@ CREATE TABLE Department(
          varchar(255),
         Emp_lastName varchar(255)
 
-Insert into Employee (Emp_Id,Emp_age,Emp_firstName,Emp_lastName,Emp_address,Emp_bloodGroup,Emp_departmentName,Emp_employeeType) 
+Insert into Employee (employeeId,age,firstName,lastName,address,bloodGroup,departmentName,employeeType)
 values (1002,22,"Vijeta","Bopche","Noida","O","Medical","P");
 
 Insert into Address(employeeId,addressID,fullAddress,city,pincode)

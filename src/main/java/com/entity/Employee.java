@@ -16,22 +16,22 @@ public class Employee implements Serializable {
 	private static final long serialVersionUID = -5255046716730821811L;
 
 	@Id
-	@Column(name = "Emp_id")
+	//@Column(name = "Emp_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	@Column(name = "Emp_age")
+	private int employeeId;
+	//@Column(name = "Emp_age")
 	private int age;
-	@Column(name = "Emp_firstName")
+	//@Column(name = "Emp_firstName")
 	private String firstName;
-	@Column(name = "Emp_lastName")
+	//@Column(name = "Emp_lastName")
 	private String lastName;
-	@Column(name = "Emp_address")
+	//@Column(name = "Emp_address")
 	private String address;
-	@Column(name = "Emp_bloodGroup")
+	//@Column(name = "Emp_bloodGroup")
 	private String bloodGroup;
-	@Column(name = "Emp_departmentName")
+	//@Column(name = "Emp_departmentName")
 	private String departmentName;
-	@Column(name = "Emp_employeeType")
+	//@Column(name = "Emp_employeeType")
 	private String employeeType;
 
 	public Employee() {
@@ -41,7 +41,7 @@ public class Employee implements Serializable {
 			String address, String bloodGroup, String departmentName,
 			String employeeType) {
 		super();
-		this.id = id;
+		this.employeeId = id;
 		this.age = age;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -52,11 +52,11 @@ public class Employee implements Serializable {
 	}
 
 	public int getId() {
-		return id;
+		return employeeId;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.employeeId = id;
 	}
 
 	public int getAge() {
@@ -117,7 +117,7 @@ public class Employee implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", age=" + age + ", firstName="
+		return "Employee [id=" + employeeId + ", age=" + age + ", firstName="
 				+ firstName + ", lastName=" + lastName + ", address=" + address
 				+ ", bloodGroup=" + bloodGroup + ", departmentName="
 				+ departmentName + ", employeeType=" + employeeType + "]";

@@ -1,4 +1,4 @@
-package com.controller;
+/*package com.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class ControllerForHibernateOperation {
 	@Qualifier("hibernateService")
 	private EmployeeService employeeService;
 
-	@RequestMapping(value = "/getEmployees",method = RequestMethod.GET)
+	@RequestMapping(value = "/ ",method = RequestMethod.GET)
 	public ResponseEntity<Object> getEmployees() {
 		try {
 			logger.debug("Invoking ofgetEmployees started");
@@ -166,3 +166,4 @@ public class ControllerForHibernateOperation {
 	
 	
 }
+*/

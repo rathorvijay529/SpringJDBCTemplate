@@ -16,7 +16,7 @@ import com.model.EmployeeMO;
 import com.model.ErrorResponseMO;
 
 @Service("hibernateService")
-public class EmployeeServiceForHibarnateOperation extends AbstractDAO implements EmployeeService {
+public class EmployeeServiceForHibarnateOperation extends AbstractDAO{// implements EmployeeService {
 
 	@Autowired
 	private EmployeeRepoForHibernate employeeRepoForHibernate;
@@ -83,7 +83,7 @@ public class EmployeeServiceForHibarnateOperation extends AbstractDAO implements
 		return null;
 	}
 
-	@Override
+	/*@Override
 	public String processSaveAddressDetails(AddressMO address) {
 		// TODO Auto-generated method stub
 		return null;
@@ -113,5 +113,5 @@ public class EmployeeServiceForHibarnateOperation extends AbstractDAO implements
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+*/
 }
