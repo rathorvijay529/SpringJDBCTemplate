@@ -36,6 +36,8 @@ This is project is all about to learn spring concepts only.we are using JDBCTemp
 •    git branch -a (checking all available branch,* will show current branch)
 •    git  checkout -b develop (creating develop branch)
 •    git push origin develop (pushing develop branch.
+  
+  $ git config --global core.editor "'C:/Program Files (x86)/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"
 
  ```
 ## Committing the changes to develop using git bash:
