@@ -9,7 +9,7 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<springframework.version>5.2.2.RELEASE</springframework.version>
+		<springframework.version>5.2.6.RELEASE</springframework.version>
 
 		<spring-security.version>5.0.6.RELEASE</spring-security.version>
 		<hibernate.version>4.3.6.Final</hibernate.version>
